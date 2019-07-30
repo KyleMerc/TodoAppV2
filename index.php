@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+    if(isset($_SESSION)) {
+
+    }
+?>
+
 <?php require_once "views/template/header.php"; ?>
 
 <div class="row justify-content-center mt-5">
