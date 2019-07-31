@@ -1,4 +1,8 @@
 <?php
+if( ! isset($_SESSION)) {
+    header("Location: ../index.php");
+}
+
 $localhost = "127.0.0.1";
 $user = "root";
 $password = "";

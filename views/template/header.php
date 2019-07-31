@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TODO Web App</title>
 
-    <link rel="stylesheet" href="views/styles/bootstrap.css">
-    <link rel="stylesheet" href="views/styles/sign.css">
+    <link rel="stylesheet" href="../styles/bootstrap.css">
+    <link rel="stylesheet" href="../styles/sign.css">
 </head>
 <body>
     <div class="container">
