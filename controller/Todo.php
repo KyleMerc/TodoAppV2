@@ -60,4 +60,8 @@ if(isset($_GET["delId"])) {
     query($sql, $mysqli);
 }
 
-header("Location: ../views/user/view_user_home.php");
+if($_SESSION["status"]["user_role_id"] == 2) {
+    header("Location: ../views/user/view_user_home.php");
+} elseif($_SESSION["status"]["user_role_id"] == 1) {
+    header("Location: ../views/admin/view_admin_home.php");
+}

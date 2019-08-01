@@ -29,7 +29,8 @@ function check($user, $pass, $conn) {
         $_SESSION["status"] = [
             "is_login" => true,
             "user" => $user,
-            "user_id" => $data["user_id"]
+            "user_id" => $data["user_id"],
+            "user_role_id" => $data["user_role_id"]
         ];
 
         if($data["user_role_id"] == 1) {
@@ -41,11 +42,6 @@ function check($user, $pass, $conn) {
         }
     } else {
         header("Location: ../index.php");        
-    }
-
-    
-
-    //var_dump($result->fetch_assoc());
-   
+    }   
 }
 
