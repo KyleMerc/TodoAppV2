@@ -3,6 +3,10 @@ session_start();
 
 require "../../model/config.php";
 
+if( ! isset($_SESSION["status"]["is_login"]) || $_SESSION["status"]["is_login"] == null) {
+    header("Location: ../../index.php");
+}
+
 if( ! isset($_GET)) {
     header("Location: view_user_home.php");
 }
@@ -35,8 +39,13 @@ $data = mysqli_fetch_assoc($result);
             <textarea cols="30" rows="10" class="form-control-plaintext"><?php echo $data["content"]; ?></textarea>
         </div>
     </form>
-
-    <a href="view_user_home.php" class="btn btn-primary">Go back</a>
-
+    
+    <?php 
+        if($_SESSION["status"]["user_role_id"] == 2) {
+            echo "<a href='view_user_home.php' class='btn btn-primary'>Go back</a>";
+        } elseif($_SESSION["status"]["user_role_id"] == 1) {
+            echo "<a href='../admin/view_admin_home.php' class='btn btn-primary'>Go back</a>";
+        }
+    ?>
 
 <?php require "../template/footer.php"; ?>

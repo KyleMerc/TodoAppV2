@@ -4,9 +4,10 @@ session_start();
     if( ! isset($_SESSION)) {
         header("Location: index.php");
     }
+// var_dump($_SERVER["HTTP_HOST"]. "/TODOapp/index.php");
     // unset($_SESSION);
     // session_destroy();
-    // var_dump($_SESSION);die;
+    //  var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>

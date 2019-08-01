@@ -1,4 +1,5 @@
 <?php
+//This is for those who want to access the controllers
 if( ! isset($_SESSION)) {
     header("Location: ../index.php");
 }

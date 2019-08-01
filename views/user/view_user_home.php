@@ -3,7 +3,7 @@ session_start();
 
 require "../../model/config.php";
 
-// var_dump($_SESSION); die;
+// var_dump($_SESSION);
 //unset($_SESSION);
     if( ! isset($_SESSION["status"]["is_login"]) || $_SESSION["status"]["is_login"] == null) {
         header("Location: ../../index.php");
