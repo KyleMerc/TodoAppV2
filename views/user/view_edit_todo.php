@@ -3,6 +3,10 @@ session_start();
 
 require "../../model/config.php";
 
+if( ! isset($_SESSION["status"]["is_login"]) || $_SESSION["status"]["is_login"] == null) {
+    header("Location: ../../index.php");
+}
+
 if( ! isset($_GET)) {
     header("Location: view_user_home.php");
 }

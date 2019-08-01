@@ -1,6 +1,9 @@
 <?php
 session_start();
 // var_dump($_SESSION);
+if( ! isset($_SESSION["status"]["is_login"]) || $_SESSION["status"]["is_login"] == null) {
+    header("Location: ../../index.php");
+}
 ?>
 
 <?php require "../template/header.php"; ?>

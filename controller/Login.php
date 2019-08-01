@@ -27,7 +27,7 @@ function check($user, $pass, $conn) {
         // var_dump($_SESSION); die;
         // var_dump($role_id["user_role_id"]); die;
         $_SESSION["status"] = [
-            // "is_login" => true,
+            "is_login" => true,
             "user" => $user,
             "user_id" => $data["user_id"]
         ];
