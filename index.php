@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+// var_dump(dirname($_SERVER["PHP_SELF"]));die;
     if( ! isset($_SESSION)) {
         header("Location: index.php");
     }

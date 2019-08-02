@@ -21,10 +21,12 @@ require "../../model/config.php";
     $user_sql = "SELECT todo_id, status, content, u.user_id, username
                  FROM users u LEFT JOIN todos t
                  ON t.user_id = u.user_id
+                 WHERE u.user_id='$user_id'
                  UNION
                  SELECT todo_id, status, content, u.user_id, username
                  FROM users u RIGHT JOIN todos t
-                 ON t.user_id = u.user_id";
+                 ON t.user_id = u.user_id
+                 WHERE u.user_id='$user_id'";
 
     $user_data = query($user_sql, $mysqli);
     // var_dump(mysqli_fetch_assoc($user_data));die;
@@ -33,22 +35,29 @@ require "../../model/config.php";
 ?>
 
 <?php require "../template/header.php"; ?>
-    <h3>Admin Panel</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Admin Panel</h3>
+        </div>
+        
+        <div class="col-md-6">
+            <form action="../../controller/Logout.php" method="post">
+                <button class="btn btn-primary float-right" type="submit">Log Out</button>
+            </form>
+        </div>
+    </div>
     
+
     <?php
         if($user_id != false) {
             $user = mysqli_fetch_assoc($user_data);  
             echo "<h3>Todos from " . $user["username"] . " </h3>";
         }
     ?>
-
-    <form action="../../controller/Logout.php" method="post">
-        <button class="btn btn-primary" type="submit">Log Out</button>
-    </form>
     
     <?php if( ! $user_id) : ?>      <!--- USER list shown --->
         <table class="table table-borderless">
-            <tr>
+            <tr class="thead-dark">
                 <th>User ID</th>
                 <th>Username</th>
                 <th>Date Created</th>
@@ -88,10 +97,21 @@ require "../../model/config.php";
                 }
                 mysqli_data_seek($user_data, 0);
                 while($result = mysqli_fetch_assoc($user_data)) :
+                    if($result["content"] == null) {
+                        continue;
+                    }
             ?>
             <tr>
                 <td><?php echo $result["todo_id"]; ?></td>
-                <td><?php echo $result["status"]; ?></td>
+                <td>
+                    <?php
+                        if($result["status"] == "DONE") {
+                            echo "<span class='text-success'>DONE</span>";
+                        } else {
+                            echo "<span class='text-primary'>IN PROGRESS</span>";
+                        }
+                    ?>
+                </td>
                 <td><?php echo $result["content"]; ?></td>
                 <td>
                     <a href="../user/view_todo.php?id=<?php echo $result["todo_id"];?>" class="btn btn-primary">View</a> |
@@ -100,7 +120,15 @@ require "../../model/config.php";
             </tr>
             <?php endwhile; ?>
         </table>
-    <?php endif; ?>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="view_admin_home.php" class="btn btn-primary">Go back</a>       
+        </div>
+        <div class="col-md-6">
+            <a href="../user/view_add_todo.php?v_id=<?php echo $_GET["v_id"]; ?>" class="btn btn-primary float-right">Add Task</a>
+        </div>
+    </div>
 
+    <?php endif; ?>
 
 <?php require "../template/footer.php"; ?>

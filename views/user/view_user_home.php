@@ -20,13 +20,17 @@ $result = query($sql, $mysqli);
 <?php require "../template/header.php"; ?>
     <h3>Welcome <?php echo $user; ?></h3>
 
-            <a href="view_add_todo.php" class="btn btn-primary" type="submit">Add Task</a>
-       
-
-            <a href="../../controller/Logout.php" class="btn btn-primary" type="submit">Log Out</a>
-   
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="view_add_todo.php" class="btn btn-primary" type="submit">Add Task</a>
+                </div>
+                <div class="col-md-6">
+                    <form action="../../controller/Logout.php" method="post">
+                        <button class="btn btn-primary float-right">Log Out</button>
+                    </form>
+                </div>
+            </div>
     
-
             <table class="table table-borderless table-hover">
                 <thead class="thead-dark">
                         <th>Todo ID</th>

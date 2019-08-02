@@ -7,9 +7,9 @@ if( ! isset($_SESSION)) {
     header("Location: ../index.php");
 }
 
-if( ! isset($_POST) || isset($_GET)) {
-    header("Location: ../views/user/view_user_home.php");
-}
+// if( ! isset($_POST) || ! isset($_GET)) {
+//     header("Location: ../views/user/view_user_home.php");
+// }
 
 // echo getcwd(); die; 
 // var_dump($_SESSION); die;
@@ -29,6 +29,18 @@ if( ! isset($_POST) || isset($_GET)) {
     // print_r($data); die;
     
 // var_dump($_SESSION["list"]);die;
+
+if(isset($_POST["adminAddContent"])) {
+    $content = htmlspecialchars($_POST["adminAddContent"]);
+    $user_id = $_POST["v_id"];
+    $sql = "INSERT INTO todos(content, user_id, status) 
+            VALUES('$content', '$user_id', 'IN PROGRESS')";
+
+   query($sql, $mysqli);
+
+   header("Location: ../views/admin/view_admin_home.php?v_id=$user_id");
+   die;
+}
 
 
 if(isset($_POST["addContent"])) {
