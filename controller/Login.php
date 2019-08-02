@@ -1,4 +1,5 @@
 <?php
+ session_start();
 
 require "../model/config.php";
 
@@ -22,7 +23,6 @@ function check($user, $pass, $conn) {
     // var_dump($exist, $data);die;
     // var_dump(mysqli_fetch_assoc($result)); die;
     if($exist && $v_pass) {
-        session_start();
         // unset($_SESSION);
         // var_dump($_SESSION); die;
         // var_dump($role_id["user_role_id"]); die;
@@ -41,6 +41,7 @@ function check($user, $pass, $conn) {
             header("Location: ../views/user/view_user_home.php");
         }
     } else {
+        $_SESSION["status"]["is_login"] = false;
         header("Location: ../index.php");        
     }   
 }

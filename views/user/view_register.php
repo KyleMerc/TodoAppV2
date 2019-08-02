@@ -9,6 +9,25 @@ session_start();
 <?php require "../template/header.php"; ?>
 <h3 class="text-center">REGISTER</h3>
 
+<?php if(isset($_SESSION["v_pass"]) && $_SESSION["v_pass"] == true) : ?>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+    <strong>Wrong Password</strong>
+    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button> -->
+    <?php unset($_SESSION["v_pass"]); ?>
+    </div>
+
+<?php elseif(isset($_SESSION["v_user"]) && $_SESSION["v_user"] == true) : ?>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+    <strong>Username is already taken</strong>
+    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button> -->
+    <?php unset($_SESSION["v_user"]); ?>
+    </div>
+<?php endif; ?>
+
     <?php
         // if(isset($_SESSION["v_pass"])  == false) {
         //     echo "<div class='alert alert-danger'> Password did not matched </div>";
