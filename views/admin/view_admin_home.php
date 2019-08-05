@@ -88,7 +88,7 @@ require "../../model/config.php";
             <tr class="thead-dark">
                 <th>Todo ID</th>
                 <th>Status</th>
-                <th>Content</th>
+                <th>Title</th>
                 <th>Action</th>
             </tr>
             <?php
@@ -114,7 +114,7 @@ require "../../model/config.php";
                 </td>
                 <td><?php echo $result["content"]; ?></td>
                 <td>
-                    <a href="../user/view_todo.php?id=<?php echo $result["todo_id"];?>" class="btn btn-primary">View</a> |
+                    <a href="../user/view_todo.php?t_id=<?php echo $result["todo_id"];?>&u_id=<?php echo $result["user_id"];?>" class="btn btn-primary">View</a> |
                     <a href="../../controller/Todo.php?delId=<?php echo $result["todo_id"];?>" class="btn btn-danger">DELETE</a>
                 </td>
             </tr>

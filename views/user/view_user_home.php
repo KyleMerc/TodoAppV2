@@ -15,6 +15,7 @@ $user_id = $_SESSION["status"]["user_id"];
 $sql = "SELECT * FROM todos WHERE user_id='$user_id'";
 
 $result = query($sql, $mysqli);
+// var_dump(mysqli_fetch_assoc($result));die;
 ?>
 
 <?php require "../template/header.php"; ?>
@@ -35,8 +36,8 @@ $result = query($sql, $mysqli);
                 <thead class="thead-dark">
                         <th>Todo ID</th>
                         <th>Status</th>
-                        <th>Content</th>
-                        <th colspan="2">Action</th>
+                        <th>Title</th>
+                        <th colspan="4">Action</th>
                 </thead>
                 
                 <?php if(mysqli_num_rows($result) > 0) : ?>
@@ -52,11 +53,9 @@ $result = query($sql, $mysqli);
                                 }
                             ?>
                         </td>
+                        <td><?php echo $data["title"]; ?></td>
                         <td>
-                            <span class="d-inline-block text-truncate" style="max-width: 150px;"><?php echo $data["content"]; ?></span>
-                        </td>
-                        <td>
-                            <a href="view_todo.php?id=<?php echo $data["todo_id"];?>" class="btn btn-primary">View</a> |
+                            <a href="view_todo.php?t_id=<?php echo $data["todo_id"];?>&u_id=<?php echo $data["user_id"]; ?>" class="btn btn-primary">View</a> |
                             <a href="view_edit_todo.php?id=<?php echo $data["todo_id"];?>" class="btn btn-primary">EDIT</a> |
                             <a href="../../controller/Todo.php?delId=<?php echo $data["todo_id"];?>" class="btn btn-danger">DELETE</a>
                         </td>

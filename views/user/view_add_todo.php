@@ -15,7 +15,14 @@ if( ! isset($_SESSION)) {
 
     <?php if($_SESSION["status"]["user_role_id"] == 2) : ?>
         <form action="../../controller/Todo.php" method="post" class="form justify-content-center">
-            <textarea name="addContent" class="form-control" id="" cols="30" rows="10"></textarea>
+            <div class="form-group">
+                <label for="">Title</label>
+                <input type="text" class="form-control" name="title">
+            </div>
+            <div class="form-group">
+                <label for="">Todo</label>
+                <textarea name="addContent" class="form-control" id="" cols="30" rows="10"></textarea>
+            </div>
             
             <input type="submit" value="Submit" name="submit" class="btn btn-primary">
         </form>
@@ -25,7 +32,16 @@ if( ! isset($_SESSION)) {
     <?php if($_SESSION["status"]["user_role_id"] == 1) : ?>
         <form action="../../controller/Todo.php" class="form justify-content-center" method="post">
             <input type="hidden" name="v_id" value="<?php echo $_GET['v_id']?>">
-            <textarea name="adminAddContent" id="" cols="30" rows="10" class="form-control"></textarea>
+
+            <div class="form-group">
+                <label for="" class="font-weight-bold">Title</label>
+                <input type="text" class="form-control" name="title">
+            </div>
+
+            <div class="form-group">
+                <label for="" class="font-weight-bold">Todo</label>
+                <textarea name="adminAddContent" id="" cols="30" rows="10" class="form-control"></textarea>
+            </div>
            
             <input type="submit" value="Submit" name="submit" class="btn btn-primary">
         </form>
