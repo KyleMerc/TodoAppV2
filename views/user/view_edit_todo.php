@@ -44,7 +44,9 @@ $data = mysqli_fetch_array($result);
                     <input type="text" class="form-control" name="title" value="<?php echo $data["title"]; ?>">
             </div>
 
-            <label for="" class="font-weight-bold">Status</label>
+            <div class="form-group">
+                <label for="" class="font-weight-bold">Status</label>
+            </div>
             <div class="form-group form-check-inline">
                 <div class="form-check">
                     <input type="radio" class="form-check-input" name="editRadStatus" value="IN PROGRESS" checked>

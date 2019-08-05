@@ -45,6 +45,7 @@ $data = mysqli_fetch_assoc($result);
 
             <div class="form-group">
                 <label for="" class="font-weight-bold">Status</label>
+                <div class="form-check form-check-inline">
                 <?php
                     if($data["status"] == 'DONE') {
                         echo  "<input type='text' class='form-control-plaintext text-success' value='DONE' disabled>";
@@ -52,6 +53,7 @@ $data = mysqli_fetch_assoc($result);
                         echo  "<input type='text' class='form-control-plaintext text-primary' value='IN PROGRESS' disabled>";
                     }
                 ?>
+                </div>
             </div>
 
             <div class="form-group">
