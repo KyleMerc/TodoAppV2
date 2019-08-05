@@ -7,34 +7,28 @@ if( ! isset($_SESSION)) {
     header("Location: ../index.php");
 }
 
-// if( ! isset($_POST) || ! isset($_GET)) {
-//     header("Location: ../views/user/view_user_home.php");
-// }
-
-// echo getcwd(); die; 
-// var_dump($_SESSION); die;
-
-// $sql = "SELECT * FROM todos WHERE user_id='$user_id'";
-// $result = getAllTodo($sql, $mysqli);
-// $data = [];
-
-    // var_dump(mysqli_fetch_assoc($result));
-    // var_dump(mysqli_fetch_assoc($result)); die;
-
-    // while($res = mysqli_fetch_assoc($result)) {
-        // echo $res["user_id"] . "<br />" . $res["content"] . "<br />" . $res["status"] . "<br />";
-    //     $data[] = $res;
-    // }   
-    // die;
-    // print_r($data); die;
-    
-// var_dump($_SESSION["list"]);die;
-// var_dump($_POST, $_GET);die;
-if(isset($_POST["adminDelTodo"])) {
-    $todo_id = htmlspecialchars($_POST["adminDelTodo"]);
-    $user_id = htmlspecialchars($_POST["userId"]);
+if(isset($_POST["adminDelTodoId"])) {
+    $todo_id = htmlspecialchars($_POST["adminDelTodoId"]);
+    $user_id = htmlspecialchars($_POST["adminUserId"]);
 
     $sql = "DELETE FROM todos WHERE todo_id='$todo_id' AND user_id='$user_id'";
+    query($sql, $mysqli);
+
+    header("Location: ../views/admin/view_admin_home.php?v_id=$user_id");
+    die;
+}
+
+if(isset($_POST["adminEditContent"])) {
+    $todo_id = $_POST["adminEditTodoId"];
+    $user_id = htmlspecialchars($_POST["adminUserId"]);
+    $title = htmlspecialchars($_POST["title"]);
+    $content = htmlspecialchars($_POST["adminEditContent"]);
+    $status = $_POST["editRadStatus"];
+
+    $sql = "UPDATE todos 
+            SET date_updated=CURRENT_TIMESTAMP, title='$title', content='$content', status='$status'
+            WHERE todo_id='$todo_id'";
+    // var_dump($sql);die;
     query($sql, $mysqli);
 
     header("Location: ../views/admin/view_admin_home.php?v_id=$user_id");
@@ -80,11 +74,10 @@ if(isset($_POST["editContent"])) {
     $title = htmlspecialchars($_POST["title"]);
     $content = htmlspecialchars($_POST["editContent"]);
     $status = $_POST["editRadStatus"];
-    $todoID = $_POST["todoId"];
-    $user_id = $_SESSION["status"]["user_id"];
+    $todo_id = $_POST["todoId"];
     $sql = "UPDATE todos 
             SET date_updated=CURRENT_TIMESTAMP, title='$title' ,content='$content', status='$status'
-            WHERE todo_id='$todoID'";
+            WHERE todo_id='$todo_id'";
 
     query($sql, $mysqli);
 }

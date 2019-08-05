@@ -60,7 +60,8 @@ $result = query($sql, $mysqli);
                                 <a href="view_edit_todo.php?id=<?php echo $data["todo_id"];?>" class="btn btn-primary">EDIT</a> |
                                 
                                 <input type="hidden" value="<?php echo $data["todo_id"]; ?>" name="delId">
-                            <input type="submit" class="btn btn-danger" value="Delete">
+                                
+                                <input type="submit" class="btn btn-danger" value="Delete">
                             </form>
                         </td>
                     </tr>
