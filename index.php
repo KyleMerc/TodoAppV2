@@ -7,8 +7,8 @@ session_start();
     }
 // var_dump($_SERVER["HTTP_HOST"]. "/TODOapp/index.php");
     // unset($_SESSION);
-    // var_dump($_SESSION);
-    // session_destroy();
+    //  var_dump($_SESSION);
+    //  session_destroy();
 ?>
 
 <!DOCTYPE html>

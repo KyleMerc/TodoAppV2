@@ -29,6 +29,17 @@ if( ! isset($_SESSION)) {
     // print_r($data); die;
     
 // var_dump($_SESSION["list"]);die;
+// var_dump($_POST, $_GET);die;
+if(isset($_POST["adminDelTodo"])) {
+    $todo_id = htmlspecialchars($_POST["adminDelTodo"]);
+    $user_id = htmlspecialchars($_POST["userId"]);
+
+    $sql = "DELETE FROM todos WHERE todo_id='$todo_id' AND user_id='$user_id'";
+    query($sql, $mysqli);
+
+    header("Location: ../views/admin/view_admin_home.php?v_id=$user_id");
+    die;
+}
 
 if(isset($_POST["adminAddContent"])) {
     $title = htmlspecialchars($_POST["title"]);
@@ -42,6 +53,16 @@ if(isset($_POST["adminAddContent"])) {
    header("Location: ../views/admin/view_admin_home.php?v_id=$user_id");
    die;
 }
+
+if(isset($_POST["userDelId"])) {
+    $userDelId = htmlspecialchars($_POST["userDelId"]);
+
+    $sql = "DELETE FROM users WHERE user_id='$userDelId'";
+
+    query($sql, $mysqli);
+}
+
+
 
 
 if(isset($_POST["addContent"])) {
@@ -68,8 +89,9 @@ if(isset($_POST["editContent"])) {
     query($sql, $mysqli);
 }
 
-if(isset($_GET["delId"])) {
-    $id = htmlspecialchars($_GET["delId"]);
+if(isset($_POST["delId"])) {
+    $id = htmlspecialchars($_POST["delId"]);
+    $user_id = htmlspecialchars($_POST["userId"]);
 
     $sql = "DELETE FROM todos WHERE todo_id='$id'";
     query($sql, $mysqli);

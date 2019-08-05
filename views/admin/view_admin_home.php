@@ -18,12 +18,12 @@ require "../../model/config.php";
     //              FROM todos
     //              JOIN users ON todos.user_id = users.user_id 
     //              WHERE users.user_id='$user_id'";
-    $user_sql = "SELECT todo_id, status, content, u.user_id, username
+    $user_sql = "SELECT todo_id, status, title, content, u.user_id, username
                  FROM users u LEFT JOIN todos t
                  ON t.user_id = u.user_id
                  WHERE u.user_id='$user_id'
                  UNION
-                 SELECT todo_id, status, content, u.user_id, username
+                 SELECT todo_id, status, title, content, u.user_id, username
                  FROM users u RIGHT JOIN todos t
                  ON t.user_id = u.user_id
                  WHERE u.user_id='$user_id'";
@@ -77,8 +77,12 @@ require "../../model/config.php";
                 <td><?php echo $data["date_created"]; ?></td>
                 <td><?php echo $data["date_updated"]; ?></td>
                 <td>
-                    <a href="<?php echo $_SERVER["PHP_SELF"]; ?>?v_id=<?php echo $data["user_id"];?>" class="btn btn-primary">View</a> |
-                    <a href="../../controller/Todo.php?delId=<?php echo $data["user_id"];?>" class="btn btn-danger">DELETE</a>
+                    <form action="../../controller/Todo.php" method="post">
+                        <a href="<?php echo $_SERVER["PHP_SELF"]; ?>?v_id=<?php echo $data["user_id"];?>" class="btn btn-primary">View</a> |
+                        
+                        <input type="hidden" value="<?php echo $data["user_id"]; ?>" name="userDelId">
+                        <button class="btn btn-danger">DELETE</button>
+                    </form>
                 </td>
             </tr>
             <?php endwhile; ?>
@@ -112,10 +116,15 @@ require "../../model/config.php";
                         }
                     ?>
                 </td>
-                <td><?php echo $result["content"]; ?></td>
+                <td><?php echo $result["title"]; ?></td>
                 <td>
-                    <a href="../user/view_todo.php?t_id=<?php echo $result["todo_id"];?>&u_id=<?php echo $result["user_id"];?>" class="btn btn-primary">View</a> |
-                    <a href="../../controller/Todo.php?delId=<?php echo $result["todo_id"];?>" class="btn btn-danger">DELETE</a>
+                    <form action="../../controller/Todo.php" method="post">
+                        <a href="../user/view_todo.php?t_id=<?php echo $result["todo_id"];?>&u_id=<?php echo $result["user_id"];?>" class="btn btn-primary">View</a> |
+                        
+                        <input type="hidden" value="<?php echo $result["todo_id"]; ?>" name="adminDelTodo">
+                        <input type="hidden" value="<?php echo $user_id ?>" name="userId">
+                        <button class="btn btn-danger" type="submit">DELETE</button>
+                    </form> 
                 </td>
             </tr>
             <?php endwhile; ?>
