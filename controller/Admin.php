@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+print_r($_POST);die;
 require "../model/config.php";
 
 var_dump($_POST);die;

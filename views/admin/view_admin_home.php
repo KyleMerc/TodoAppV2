@@ -74,12 +74,12 @@ require "../../model/config.php";
             <tr>
                 <td><?php echo $data["user_id"]; ?></td>
                 <td><?php echo $data["username"]; ?></td>
-                <td><?php echo $data["date_created"]; ?></td>
-                <td><?php echo $data["date_updated"]; ?></td>
+                <td><?php echo date('M j Y g:i A', strtotime($data["date_created"])); ?></td>
+                <td><?php echo date('M j Y g:i A', strtotime($data["date_updated"])); ?></td>
                 <td>
                     <form action="../../controller/Todo.php" method="post">
                         <a href="<?php echo $_SERVER["PHP_SELF"]; ?>?v_id=<?php echo $data["user_id"];?>" class="btn btn-primary">View</a> |
-                        <a href="view_edit_todo.php?id=<?php echo $data["user_id"];?>" class="btn btn-primary">EDIT</a> |
+                        <a href="view_admin_edit_user.php?id=<?php echo $data["user_id"];?>" class="btn btn-primary">EDIT</a> |
 
                         <input type="hidden" value="<?php echo $data["user_id"]; ?>" name="userDelId">
                         <button class="btn btn-danger">DELETE</button>
@@ -119,14 +119,14 @@ require "../../model/config.php";
                 </td>
                 <td><?php echo $result["title"]; ?></td>
                 <td>
-                    <form id="adminEdit" action="../user/view_edit_todo.php" method="get"></form>
+                    <!-- <form id="adminEdit" action="../user/view_edit_todo.php" method="get"></form> -->
                     <form id="adminDel" action="../../controller/Todo.php" method="post"></form>
                     
                         <a href="../user/view_todo.php?t_id=<?php echo $result["todo_id"];?>&u_id=<?php echo $result["user_id"];?>" class="btn btn-primary">View</a> |
                         
-                        <input type="hidden" value="<?php echo $result["todo_id"]; ?>" name="id" form="adminEdit">
-                        <input type="hidden" value="<?php echo $user_id ?>" name="adminUserId" form="adminEdit">
-                        <button class="btn btn-primary" type="submit" form="adminEdit">EDIT</button>
+                        <!-- <input type="hidden" value="" name="id" form="adminEdit"> -->
+                        <!-- <input type="hidden" value="" name="adminUserId" form="adminEdit"> -->
+                        <a href="../user/view_edit_todo.php?adminUserId=<?php echo $result['user_id']; ?>&id=<?php echo $result['todo_id']; ?>" class="btn btn-primary">EDIT</a>
                         |
                         
 

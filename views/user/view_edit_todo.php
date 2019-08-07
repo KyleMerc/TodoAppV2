@@ -1,4 +1,5 @@
 <?php
+// var_dump($_GET);
 session_start();
 
 require "../../model/config.php";
