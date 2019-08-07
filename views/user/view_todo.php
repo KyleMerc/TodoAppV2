@@ -13,7 +13,9 @@ if( ! isset($_GET)) {
 
 $todoId = htmlspecialchars($_GET["t_id"]);
 $userId = htmlspecialchars($_GET["u_id"]);
-$sql = "SELECT * FROM todos WHERE todo_id='$todoId' AND user_id='$userId'";
+$sql = "SELECT * FROM todos t 
+        JOIN users u ON t.user_id = u.user_id 
+        WHERE todo_id='$todoId' AND t.user_id='$userId'";
 
 $result = query($sql, $mysqli);
 
@@ -22,7 +24,7 @@ $data = mysqli_fetch_assoc($result);
 ?>
 
 <?php require "../template/header.php"; ?>
-    <?php if($todoId == $data["todo_id"]) : ?>
+    <?php if($todoId == $data["todo_id"] && $data['username'] == $_SESSION['status']['user']) : ?>
         <h3>View Todo # <?php echo $_GET["t_id"]; ?></h3>
         <h6> *read only </h6>
 

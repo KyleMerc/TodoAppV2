@@ -22,7 +22,7 @@ if(isset($_POST["adminEditContent"])) {
     $todo_id = $_POST["adminEditTodoId"];
     $user_id = htmlspecialchars($_POST["adminUserId"]);
     $title = htmlspecialchars($_POST["title"]);
-    $content = htmlspecialchars($_POST["adminEditContent"]);
+    $content = htmlspecialchars(addslashes($_POST["adminEditContent"]));
     $status = $_POST["editRadStatus"];
 
     $sql = "UPDATE todos 
@@ -30,14 +30,15 @@ if(isset($_POST["adminEditContent"])) {
             WHERE todo_id='$todo_id'";
     // var_dump($sql);die;
     query($sql, $mysqli);
-
+    // $result = query($sql, $mysqli);
+    // var_dump(mysqli_error($mysqli));die;
     header("Location: ../views/admin/view_admin_home.php?v_id=$user_id");
     die;
 }
 
 if(isset($_POST["adminAddContent"])) {
     $title = htmlspecialchars($_POST["title"]);
-    $content = htmlspecialchars($_POST["adminAddContent"]);
+    $content = htmlspecialchars(addslashes($_POST["adminAddContent"]));
     $user_id = $_POST["v_id"];
     $sql = "INSERT INTO todos(title, content, user_id, status) 
             VALUES('$title', '$content', '$user_id', 'IN PROGRESS')";

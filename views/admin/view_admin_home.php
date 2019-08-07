@@ -97,7 +97,8 @@ require "../../model/config.php";
                 <th>Action</th>
             </tr>
             <?php
-                if($user_data == false) {
+                $verify = mysqli_fetch_assoc($user_data);
+                if($verify['username'] == null) {
                     header("Location: view_admin_home.php");
                 }
                 mysqli_data_seek($user_data, 0);
@@ -138,6 +139,7 @@ require "../../model/config.php";
             </tr>
             <?php endwhile; ?>
         </table>
+    
     <div class="row">
         <div class="col-md-6">
             <a href="view_admin_home.php" class="btn btn-primary">Go back</a>       
@@ -146,7 +148,6 @@ require "../../model/config.php";
             <a href="../user/view_add_todo.php?v_id=<?php echo $_GET["v_id"]; ?>" class="btn btn-primary float-right">Add Task</a>
         </div>
     </div>
-
     <?php endif; ?>
-
+    
 <?php require "../template/footer.php"; ?>

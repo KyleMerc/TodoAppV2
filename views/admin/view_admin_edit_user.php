@@ -2,7 +2,7 @@
 session_start();
 
 require "../../model/config.php";
-
+var_dump($_SESSION);
 $user_id = $_GET['id'] ?? false;
 
 $sql = "SELECT * FROM users WHERE user_id='$user_id'";

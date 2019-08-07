@@ -22,7 +22,7 @@ $data = mysqli_fetch_array($result);
 ?>
 
 <?php require "../template/header.php"; ?>
-    <?php if($todoId == $data["todo_id"]) : ?>
+    <?php if($todoId == $data['todo_id'] && $user_id == $_POST['userId']) : ?>
         <h3>Edit Todo # <?php echo $_GET["id"]; ?></h3>
 
         <?php if($_SESSION["status"]["user_role_id"] == 2) : ?> <!-- User Edit Todo -->
