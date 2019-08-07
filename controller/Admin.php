@@ -1,12 +1,12 @@
 <?php
-// session_start();
+session_start();
 
-// require "../model/config.php";
+require "../model/config.php";
 
-// var_dump($_POST);die;
-// if( ! isset($_SESSION)) {
-//     header("Location: ../index.php");
-// }
+var_dump($_POST);die;
+if( ! isset($_SESSION)) {
+    header("Location: ../index.php");
+}
 
 
 // if(isset($_POST["adminSubmit"])) {

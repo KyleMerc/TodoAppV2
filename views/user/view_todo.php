@@ -30,11 +30,11 @@ $data = mysqli_fetch_assoc($result);
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="" class="font-weight-bold">Date Created</label>
-                    <input type="text" value="<?php echo $data["date_created"]; ?>" class="form-control-plaintext" disabled>
+                    <input type="text" value="<?php echo date('M j Y g:i A', strtotime($data["date_created"])); ?>" class="form-control-plaintext" disabled>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="" class="font-weight-bold">Date Updated</label>
-                    <input type="text" value="<?php echo $data["date_updated"]; ?>" class="form-control-plaintext" disabled>
+                    <input type="text" value="<?php echo date('M j Y g:i A', strtotime($data["date_updated"])); ?>" class="form-control-plaintext" disabled>
                 </div>
             </div>
 
