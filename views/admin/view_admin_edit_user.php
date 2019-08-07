@@ -49,7 +49,7 @@ $data = mysqli_fetch_assoc($result);
             
             <div class="row">
                 <div class="form-group col">
-                    <a href="view_admin_home.php" class="btn btn-primary">Go back</a>
+                    <button name="editGoBack" class="btn btn-primary" type="submit">Go back</button>
                 </div>
                 <div class="form-group col-9">
                     <button type="submit" class="btn btn-primary" type="submit" name="editUser">Save</button>

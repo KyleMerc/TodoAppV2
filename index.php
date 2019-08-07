@@ -47,7 +47,7 @@ session_start();
 
             <button class="btn btn-primary btn-lg btn-block" type="submit" name="login">Log In</button>
 
-            <a href="views/user/view_register.php" class="btn btn-primary btn-lg btn-block" type="submit" name="register">Register</a>
+            <a href="views/user/view_register.php" class="btn btn-primary btn-lg btn-block" name="register">Register</a>
         </form>
     </div>
 

@@ -19,10 +19,17 @@ $sql = "SELECT * FROM todos WHERE todo_id='$todoId' AND user_id='$user_id'";
 $result = query($sql, $mysqli);
 
 $data = mysqli_fetch_array($result);
+
+$role_id = $_SESSION['status']['user_role_id'];
+$todo_check = $todoId == $data["todo_id"];
+// $username_check = $data['username'] == $_SESSION['status']['user'];
+
+$user_verify = ($role_id == 2 && $todo_check)? 'user' : 
+                ($role_id == 1 && $todo_check)? 'admin' : false;
 ?>
 
 <?php require "../template/header.php"; ?>
-    <?php if($todoId == $data['todo_id'] && $user_id == $_POST['userId']) : ?>
+    <?php if($user_verify == 'user' || $user_verify == 'admin') : ?>
         <h3>Edit Todo # <?php echo $_GET["id"]; ?></h3>
 
         <?php if($_SESSION["status"]["user_role_id"] == 2) : ?> <!-- User Edit Todo -->

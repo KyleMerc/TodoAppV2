@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `todos` (
   `todo_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `title` varchar(40) NOT NULL,
   `content` text NOT NULL,
   `status` enum('IN PROGRESS','DONE') NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp(),

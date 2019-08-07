@@ -23,7 +23,7 @@ $result = query($sql, $mysqli);
 
             <div class="row">
                 <div class="col-md-6">
-                    <a href="view_add_todo.php" class="btn btn-primary" type="submit">Add Task</a>
+                    <a href="view_add_todo.php" class="btn btn-primary">Add Task</a>
                 </div>
                 <div class="col-md-6">
                     <form action="../../controller/Logout.php" method="post">

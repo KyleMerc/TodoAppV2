@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+var_dump($_SESSION);
 require "../../model/config.php";
 
 // unset($_SESSION);
@@ -97,10 +97,12 @@ require "../../model/config.php";
                 <th>Action</th>
             </tr>
             <?php
+                mysqli_data_seek($user_data, 0);
                 $verify = mysqli_fetch_assoc($user_data);
                 if($verify['username'] == null) {
                     header("Location: view_admin_home.php");
                 }
+
                 mysqli_data_seek($user_data, 0);
                 while($result = mysqli_fetch_assoc($user_data)) :
                     if($result["content"] == null) {
@@ -120,21 +122,18 @@ require "../../model/config.php";
                 </td>
                 <td><?php echo $result["title"]; ?></td>
                 <td>
-                    <!-- <form id="adminEdit" action="../user/view_edit_todo.php" method="get"></form> -->
-                    <form id="adminDel" action="../../controller/Todo.php" method="post"></form>
-                    
+                    <!-- <form id="adminView" action="../user/view_todo.php" method="get"></form> -->
+                    <form action="../../controller/Todo.php" method="post">
                         <a href="../user/view_todo.php?t_id=<?php echo $result["todo_id"];?>&u_id=<?php echo $result["user_id"];?>" class="btn btn-primary">View</a> |
                         
-                        <!-- <input type="hidden" value="" name="id" form="adminEdit"> -->
-                        <!-- <input type="hidden" value="" name="adminUserId" form="adminEdit"> -->
-                        <a href="../user/view_edit_todo.php?adminUserId=<?php echo $result['user_id']; ?>&id=<?php echo $result['todo_id']; ?>" class="btn btn-primary">EDIT</a>
-                        |
+                        
+                        <a href="../user/view_edit_todo.php?adminUserId=<?php echo $result['user_id']; ?>&id=<?php echo $result['todo_id']; ?>" class="btn btn-primary">EDIT</a> |
                         
 
-                        <input type="hidden" value="<?php echo $result["todo_id"]; ?>" name="adminDelTodoId" form="adminDel">
-                        <input type="hidden" value="<?php echo $user_id ?>" name="adminUserId" form="adminDel">
-                        <button class="btn btn-danger" type="submit" form="adminDel">DELETE</button>
-                    
+                        <input type="hidden" value="<?php echo $result["todo_id"]; ?>" name="adminDelTodoId">
+                        <input type="hidden" value="<?php echo $user_id ?>" name="adminUserId">
+                        <button class="btn btn-danger" type="submit">DELETE</button>
+                    </form>        
                 </td>
             </tr>
             <?php endwhile; ?>
