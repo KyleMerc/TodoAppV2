@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+// var_dump($_POST);die;
 require "../model/config.php";
 
 
@@ -12,59 +12,72 @@ $user_id = $_POST['userId'];
 $username = $_POST['newUsername'] == $_POST['oldUsername']? $_POST['oldUsername'] : $_POST['newUsername'];
 
 //Check other usernames if it already exists 
-$sql = "SELECT user_id, username FROM users";
+check_username($user_id, $username, $mysqli);
 
-$result = query($sql, $mysqli);
+function check_username($user_id, $username, $conn) {
+    $sql = "SELECT user_id, username FROM users";
 
-if(empty($username)) {
-    $_SESSION['error']['emptyUsername'] = true;
-    header("Location: ../views/admin/view_admin_edit_user.php?id=$user_id");
-    die;
-}
+    $result = query($sql, $conn);
 
-while($data = mysqli_fetch_assoc($result)) {
-    $data_check[] = $data;
-}
-foreach($data_check as $row){
-    if($username == $row['username']) {
-        if($row['user_id'] == $user_id) continue;
-        
-        $_SESSION['error']['errorUsername'] = true;
+    if(empty($username)) {
+        $_SESSION['error']['emptyUsername'] = true;
         header("Location: ../views/admin/view_admin_edit_user.php?id=$user_id");
         die;
     }
+
+    while($data = mysqli_fetch_assoc($result)) {
+        $data_check[] = $data;
+    }
+    foreach($data_check as $row){
+        if($username == $row['username']) {
+            if($row['user_id'] == $user_id) continue;
+            
+            $_SESSION['error']['errorUsername'] = true;
+            header("Location: ../views/admin/view_admin_edit_user.php?id=$user_id");
+            die;
+        }
+    }
 }
-//---------------
+//------------------
 
 //Admin error sessions
-if(isset($_POST['actionAdminGoBack'])) {  
-    unset($_SESSION['error']);
-    header("Location: ../views/admin/view_admin_home.php");
-    die;
+erase_error_sess();
+
+function erase_error_sess() {
+    if(isset($_POST['actionAdminGoBack']) && $_POST['actionAdminGoBack'] == 'Go Back') {
+        unset($_SESSION['error']);
+        header("Location: ../views/admin/view_admin_home.php");
+        die;
+    }
 }
 //----------
 
 //Check new password for edited user
+check_password($user_id);
 
-if(($_POST['newPassword'] !== $_POST['confNewPassword']) || empty($_POST['newPassword'])) {
-    $_SESSION['error']['errorPass'] = true;
-    
-    header("Location: ../views/admin/view_admin_edit_user.php?id=$user_id");
-    die;
+function check_password($user_id) {
+    if(($_POST['newPassword'] !== $_POST['confNewPassword']) || empty($_POST['newPassword'])) {
+        $_SESSION['error']['errorPass'] = true;
+        header("Location: ../views/admin/view_admin_edit_user.php?id=$user_id");
+        die;
+    }
 }
 //------------
 
+//Admin edit user account
+edit_user($username, $user_id, $mysqli);
 
-if(isset($_POST["editUser"])) {
-    $password = $_POST["newPassword"] == ''? $_POST['oldPassword'] : password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
+function edit_user($username, $user_id, $conn) {
+    if(isset($_POST["editUser"])) {
+        $password = $_POST["newPassword"] == ''? $_POST['oldPassword'] : password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
+        
+        $sql = "UPDATE users
+                SET username='$username', password='$password', date_updated=CURRENT_TIMESTAMP
+                WHERE user_id='$user_id'";
+                
     
-    //$user_id = $_POST['userId'];
-    $sql = "UPDATE users
-            SET username='$username', password='$password', date_updated=CURRENT_TIMESTAMP
-            WHERE user_id='$user_id'";
-            
-
-   query($sql, $mysqli);
+       query($sql, $conn);
+       header("Location: ../views/admin/view_admin_home.php");
+    }
 }
-
-header("Location: ../views/admin/view_admin_home.php");
+//------------

@@ -3,6 +3,11 @@ require "../model/config.php";
 
 session_start();
 
+$conn = $mysqli;
+
+register($conn);
+
+function register($conn) {
     if(isset($_POST["register"])) {
         $user = htmlspecialchars($_POST["username"]);
         $pass = htmlspecialchars($_POST["password"]);
@@ -15,7 +20,7 @@ session_start();
         }
 
         $verify_sql = "SELECT * FROM users WHERE username='$user'";
-        $result = query($verify_sql, $mysqli);
+        $result = query($verify_sql, $conn);
         $exist = mysqli_num_rows($result);
 
         //encrypt password
@@ -23,7 +28,7 @@ session_start();
 
         if( ! $exist) {
             $insert_sql = "INSERT INTO users(username, password, user_role_id) VALUES('$user', '$encPass', 2)";
-            query($insert_sql, $mysqli);
+            query($insert_sql, $conn);
             header("Location: ../index.php");
         } else {
             $_SESSION["v_user"] = true;
@@ -34,3 +39,4 @@ session_start();
     } else {
         header("Location: ../index.php");
     }
+}
