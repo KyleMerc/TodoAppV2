@@ -3,8 +3,6 @@ session_start();
 
 require "../../model/config.php";
 
-// var_dump($_SESSION);
-//unset($_SESSION);
     if( ! isset($_SESSION["status"]["is_login"]) || $_SESSION["status"]["is_login"] == null) {
         header("Location: ../../index.php");
     }
@@ -15,7 +13,6 @@ $user_id = $_SESSION["status"]["user_id"];
 $sql = "SELECT * FROM todos WHERE user_id='$user_id'";
 
 $result = query($sql, $mysqli);
-// var_dump(mysqli_fetch_assoc($result));die;
 ?>
 
 <?php require "../template/header.php"; ?>
@@ -23,7 +20,7 @@ $result = query($sql, $mysqli);
 
             <div class="row">
                 <div class="col-md-6">
-                    <a href="view_add_todo.php" class="btn btn-primary" type="submit">Add Task</a>
+                    <a href="view_add_todo.php" class="btn btn-primary">Add Task</a>
                 </div>
                 <div class="col-md-6">
                     <form action="../../controller/Logout.php" method="post">
@@ -60,7 +57,8 @@ $result = query($sql, $mysqli);
                                 <a href="view_edit_todo.php?id=<?php echo $data["todo_id"];?>" class="btn btn-primary">EDIT</a> |
                                 
                                 <input type="hidden" value="<?php echo $data["todo_id"]; ?>" name="delId">
-                            <input type="submit" class="btn btn-danger" value="Delete">
+                                
+                                <input type="submit" class="btn btn-danger" value="Delete">
                             </form>
                         </td>
                     </tr>

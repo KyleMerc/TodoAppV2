@@ -13,16 +13,27 @@ if( ! isset($_GET)) {
 
 $todoId = htmlspecialchars($_GET["t_id"]);
 $userId = htmlspecialchars($_GET["u_id"]);
-$sql = "SELECT * FROM todos WHERE todo_id='$todoId' AND user_id='$userId'";
+
+
+$sql = "SELECT * FROM todos t 
+        JOIN users u ON t.user_id = u.user_id 
+        WHERE todo_id='$todoId' AND t.user_id='$userId'";
 
 $result = query($sql, $mysqli);
 
 $data = mysqli_fetch_assoc($result);
-// var_dump($data);die;
+
+//Lack of checking of GET parameters for admin
+$role_id = $_SESSION['status']['user_role_id'];
+$todo_check = $todoId == $data["todo_id"];
+$username_check = $data['username'] == $_SESSION['status']['user'];
+
+$user_verify = ($role_id == 2 && $todo_check && $username_check)? 'user' : 
+                ($role_id == 1 && $todo_check)? 'admin' : false;
 ?>
 
 <?php require "../template/header.php"; ?>
-    <?php if($todoId == $data["todo_id"]) : ?>
+    <?php if($user_verify == 'user' || $user_verify == 'admin') : ?>
         <h3>View Todo # <?php echo $_GET["t_id"]; ?></h3>
         <h6> *read only </h6>
 
@@ -30,11 +41,11 @@ $data = mysqli_fetch_assoc($result);
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="" class="font-weight-bold">Date Created</label>
-                    <input type="text" value="<?php echo $data["date_created"]; ?>" class="form-control-plaintext" disabled>
+                    <input type="text" value="<?php echo date('M j Y g:i A', strtotime($data["date_created"])); ?>" class="form-control-plaintext" disabled>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="" class="font-weight-bold">Date Updated</label>
-                    <input type="text" value="<?php echo $data["date_updated"]; ?>" class="form-control-plaintext" disabled>
+                    <input type="text" value="<?php echo date('M j Y g:i A', strtotime($data["date_updated"])); ?>" class="form-control-plaintext" disabled>
                 </div>
             </div>
 

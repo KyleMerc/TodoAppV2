@@ -1,14 +1,9 @@
 <?php
 session_start();
-// var_dump($_SERVER["HTTP_HOST"], $_SERVER["DOCUMENT_ROOT"], __DIR__);die;
-// var_dump(dirname($_SERVER["PHP_SELF"]));die;
+
     if( ! isset($_SESSION)) {
         header("Location: index.php");
     }
-// var_dump($_SERVER["HTTP_HOST"]. "/TODOapp/index.php");
-    // unset($_SESSION);
-    //  var_dump($_SESSION);
-    //  session_destroy();
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +42,7 @@ session_start();
 
             <button class="btn btn-primary btn-lg btn-block" type="submit" name="login">Log In</button>
 
-            <a href="views/user/view_register.php" class="btn btn-primary btn-lg btn-block" type="submit" name="register">Register</a>
+            <a href="views/user/view_register.php" class="btn btn-primary btn-lg btn-block" name="register">Register</a>
         </form>
     </div>
 
