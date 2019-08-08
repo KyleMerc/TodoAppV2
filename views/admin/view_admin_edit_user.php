@@ -2,7 +2,7 @@
 session_start();
 
 require "../../model/config.php";
-var_dump($_SESSION);
+
 $user_id = $_GET['id'] ?? false;
 
 $sql = "SELECT * FROM users WHERE user_id='$user_id'";
@@ -30,12 +30,46 @@ $data = mysqli_fetch_assoc($result);
                     <input type="text" class="form-control-plaintext" value="<?php echo date('M j Y g:i A', strtotime($data["date_updated"]));?>">
                 </div>
             </div>
+
+            <!-- Username Error -->
+            <div class="form-row">
+                <div class="form-group">
+                <?php if(isset($_SESSION['error']['emptyUsername'])) : ?>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                            <strong>Username is empty</strong> 
+                    </div>       
+                    <?php unset($_SESSION['error']); ?>
+                <?php endif; ?>
+                <?php if(isset($_SESSION['error']['errorUsername'])) : ?>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                            <strong>Username is already taken</strong>   
+                    </div>     
+                    <?php unset($_SESSION['error']); ?>
+                <?php endif; ?>
+                </div>
+            </div>
+            <!------------------>
+
             <div class="form-row">
                 <div class="form-group col-auto">
                     <label for="" class="font-weight-bold">Username</label>
                     <input type="text" class="form-control" value="<?php echo $data['username']; ?>" name="newUsername">
                 </div>
             </div>
+
+            <!-- Password Error -->
+            <div class="form-group">
+                <div class="form-row">
+                <?php if(isset($_SESSION['error']['errorPass'])) : ?>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                            <strong>Wrong Password</strong> 
+                    </div>       
+                    <?php unset($_SESSION['error']); ?>
+                <?php endif; ?>
+                </div>
+            </div>
+            <!------------------>
+
             <div class="form-row">
                 <div class="form-group col-auto">
                     <label for="" class="font-weight-bold">Password</label>
@@ -49,7 +83,7 @@ $data = mysqli_fetch_assoc($result);
             
             <div class="row">
                 <div class="form-group col">
-                    <button name="editGoBack" class="btn btn-primary" type="submit">Go back</button>
+                    <button name="actionAdminGoBack" class="btn btn-primary" type="submit">Go back</button>
                 </div>
                 <div class="form-group col-9">
                     <button type="submit" class="btn btn-primary" type="submit" name="editUser">Save</button>

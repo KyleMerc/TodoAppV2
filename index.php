@@ -1,14 +1,9 @@
 <?php
 session_start();
-// var_dump($_SERVER["HTTP_HOST"], $_SERVER["DOCUMENT_ROOT"], __DIR__);die;
-// var_dump(dirname($_SERVER["PHP_SELF"]));die;
+
     if( ! isset($_SESSION)) {
         header("Location: index.php");
     }
-// var_dump($_SERVER["HTTP_HOST"]. "/TODOapp/index.php");
-    // unset($_SESSION);
-    //  var_dump($_SESSION);
-    //  session_destroy();
 ?>
 
 <!DOCTYPE html>

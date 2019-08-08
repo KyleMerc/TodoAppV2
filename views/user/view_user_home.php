@@ -3,8 +3,6 @@ session_start();
 
 require "../../model/config.php";
 
-// var_dump($_SESSION);
-//unset($_SESSION);
     if( ! isset($_SESSION["status"]["is_login"]) || $_SESSION["status"]["is_login"] == null) {
         header("Location: ../../index.php");
     }
@@ -15,7 +13,6 @@ $user_id = $_SESSION["status"]["user_id"];
 $sql = "SELECT * FROM todos WHERE user_id='$user_id'";
 
 $result = query($sql, $mysqli);
-// var_dump(mysqli_fetch_assoc($result));die;
 ?>
 
 <?php require "../template/header.php"; ?>

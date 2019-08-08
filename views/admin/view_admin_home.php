@@ -1,9 +1,7 @@
 <?php
 session_start();
-var_dump($_SESSION);
-require "../../model/config.php";
 
-// unset($_SESSION);
+require "../../model/config.php";
 
     if( ! isset($_SESSION["status"]["is_login"]) || $_SESSION["status"]["is_login"] == null) {
         header("Location: ../../index.php");
@@ -14,10 +12,6 @@ require "../../model/config.php";
     $sql = "SELECT * FROM users";
     $result = query($sql, $mysqli);
 
-    // $user_sql = "SELECT todo_id, status, content, username 
-    //              FROM todos
-    //              JOIN users ON todos.user_id = users.user_id 
-    //              WHERE users.user_id='$user_id'";
     $user_sql = "SELECT todo_id, status, title, content, u.user_id, username
                  FROM users u LEFT JOIN todos t
                  ON t.user_id = u.user_id
@@ -29,9 +23,6 @@ require "../../model/config.php";
                  WHERE u.user_id='$user_id'";
 
     $user_data = query($user_sql, $mysqli);
-    // var_dump(mysqli_fetch_assoc($user_data));die;
-    // var_dump($_SERVER["PHP_SELF"]);die;
-    //Daghan pa tiwasonon ani dri
 ?>
 
 <?php require "../template/header.php"; ?>
@@ -56,7 +47,7 @@ require "../../model/config.php";
     ?>
     
     <?php if( ! $user_id) : ?>      <!--- USER list shown --->
-        <table class="table table-borderless">
+        <table class="table table-borderless table-hover">
             <tr class="thead-dark">
                 <th>User ID</th>
                 <th>Username</th>
@@ -65,7 +56,6 @@ require "../../model/config.php";
                 <th>Action</th>
             </tr>
             <?php
-                // mysqli_data_seek($result, 0);
                 while($data = mysqli_fetch_assoc($result)) :
                     if($data["user_role_id"] == 1) {
                         continue;
@@ -89,7 +79,7 @@ require "../../model/config.php";
             <?php endwhile; ?>
         </table>
     <?php else : ?> <!--- Users TODO list shown ---->
-        <table class="table table-borderless">
+        <table class="table table-borderless table-hover">
             <tr class="thead-dark">
                 <th>Todo ID</th>
                 <th>Status</th>
@@ -122,14 +112,11 @@ require "../../model/config.php";
                 </td>
                 <td><?php echo $result["title"]; ?></td>
                 <td>
-                    <!-- <form id="adminView" action="../user/view_todo.php" method="get"></form> -->
                     <form action="../../controller/Todo.php" method="post">
                         <a href="../user/view_todo.php?t_id=<?php echo $result["todo_id"];?>&u_id=<?php echo $result["user_id"];?>" class="btn btn-primary">View</a> |
-                        
-                        
+                          
                         <a href="../user/view_edit_todo.php?adminUserId=<?php echo $result['user_id']; ?>&id=<?php echo $result['todo_id']; ?>" class="btn btn-primary">EDIT</a> |
                         
-
                         <input type="hidden" value="<?php echo $result["todo_id"]; ?>" name="adminDelTodoId">
                         <input type="hidden" value="<?php echo $user_id ?>" name="adminUserId">
                         <button class="btn btn-danger" type="submit">DELETE</button>

@@ -1,9 +1,5 @@
 <?php
 session_start();
-// var_dump($_SESSION);
-// if(isset($_SESSION["status"]["is_login"]) || $_SESSION["status"]["is_login"] == null) {
-//     header("Location: ../../index.php");
-// }
 ?>
 
 <?php require "../template/header.php"; ?>
@@ -12,31 +8,18 @@ session_start();
 <?php if(isset($_SESSION["v_pass"]) && $_SESSION["v_pass"] == true) : ?>
     <div class="alert alert-danger alert-dismissible" role="alert">
     <strong>Wrong Password</strong>
-    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button> -->
+
     <?php unset($_SESSION["v_pass"]); ?>
     </div>
 
 <?php elseif(isset($_SESSION["v_user"]) && $_SESSION["v_user"] == true) : ?>
     <div class="alert alert-danger alert-dismissible" role="alert">
     <strong>Username is already taken</strong>
-    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button> -->
+    
     <?php unset($_SESSION["v_user"]); ?>
     </div>
 <?php endif; ?>
 
-    <?php
-        // if(isset($_SESSION["v_pass"])  == false) {
-        //     echo "<div class='alert alert-danger'> Password did not matched </div>";
-        // }
-
-        // if(isset($_SESSION["v_user"])  == true  ) {
-        //     echo "<div class='alert alert-danger'> Password did not matched </div>";
-        // }
-    ?>
 
     <form action="../../controller/Register.php" method="post">
         <div class="form-group">

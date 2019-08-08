@@ -11,18 +11,18 @@ if( ! isset($_SESSION["status"]["is_login"]) || $_SESSION["status"]["is_login"] 
 if( ! isset($_GET)) {
     header("Location: view_user_home.php");
 }
-// var_dump($_GET);die;
+
+//Lack checking of GET parameters for admin
 $todoId = $_GET["id"];
 $user_id = $_SESSION["status"]["user_role_id"] == 1? $_GET["adminUserId"] : $_SESSION["status"]["user_id"];
 $sql = "SELECT * FROM todos WHERE todo_id='$todoId' AND user_id='$user_id'";
-// var_dump($user_id);die;
+
 $result = query($sql, $mysqli);
 
 $data = mysqli_fetch_array($result);
 
 $role_id = $_SESSION['status']['user_role_id'];
 $todo_check = $todoId == $data["todo_id"];
-// $username_check = $data['username'] == $_SESSION['status']['user'];
 
 $user_verify = ($role_id == 2 && $todo_check)? 'user' : 
                 ($role_id == 1 && $todo_check)? 'admin' : false;

@@ -1,6 +1,6 @@
 <?php
 require "../model/config.php";
-// var_dump($_POST);die;
+
 session_start();
 
 if( ! isset($_SESSION)) {
@@ -28,10 +28,8 @@ if(isset($_POST["adminEditContent"])) {
     $sql = "UPDATE todos 
             SET date_updated=CURRENT_TIMESTAMP, title='$title', content='$content', status='$status'
             WHERE todo_id='$todo_id'";
-    // var_dump($sql);die;
+
     query($sql, $mysqli);
-    // $result = query($sql, $mysqli);
-    // var_dump(mysqli_error($mysqli));die;
     header("Location: ../views/admin/view_admin_home.php?v_id=$user_id");
     die;
 }
@@ -66,12 +64,11 @@ if(isset($_POST["addContent"])) {
     $user_id = $_SESSION["status"]["user_id"];
     $sql = "INSERT INTO todos(title, content, user_id, status) 
             VALUES('$title', '$content', '$user_id', 'IN PROGRESS')";
-    // var_dump($sql);die;
+   
    query($sql, $mysqli);
 }
 
 if(isset($_POST["editContent"])) {
-    // var_dump($_POST); die;
     $title = htmlspecialchars($_POST["title"]);
     $content = htmlspecialchars($_POST["editContent"]);
     $status = $_POST["editRadStatus"];
