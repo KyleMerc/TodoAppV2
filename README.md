@@ -1,6 +1,8 @@
 ﻿# TODO App
 <img src="SQL_Backup/TODO_ERD.png" width="600" height="600" style="float: right;">
 
+
+
 ### Notes
 - Admin is already created.
 - Admin can't update it's own password.

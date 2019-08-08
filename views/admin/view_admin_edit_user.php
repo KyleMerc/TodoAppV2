@@ -1,6 +1,6 @@
 <?php
 session_start();
-var_dump($_SESSION);
+// var_dump($_SESSION);
 require "../../model/config.php";
 
 $user_id = $_GET['id'] ?? false;

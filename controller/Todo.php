@@ -92,7 +92,7 @@ function user_add_todo($conn) {
         $sql = "INSERT INTO todos(title, content, user_id, status) 
                 VALUES('$title', '$content', '$user_id', 'IN PROGRESS')";
     
-    query($sql, $conn);
+        query($sql, $conn);
     }
 }
 //---------------
