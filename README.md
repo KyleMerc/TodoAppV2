@@ -1,12 +1,11 @@
 ﻿# TODO App
-Here is my ERD
-![ERD](SQL_Backup/TODO_ERD.png)
+<img src="SQL_Backup/TODO_ERD.png" width="600" height="600" style="float: right;">
 
 ### Notes
 - Admin is already created.
 - Admin can't update it's own password.
-- Users need to register.
-- Users can't update password only the Admin can.
+- User need to register.
+- User can't update password only the Admin can.
 
 
 ## C.R.U.D
@@ -26,3 +25,6 @@ Here is my ERD
 	2. Read User Todo
 	3. Update User Todo
 	4. Delete User Todo
+
+**It seems that I can restrict the access of User to the other Todos of another User
+but in Admin I just want to do it the same but I can't for now.**
