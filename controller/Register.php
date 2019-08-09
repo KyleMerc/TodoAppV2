@@ -13,7 +13,13 @@ function register($conn) {
         $pass = htmlspecialchars($_POST["password"]);
         $confPass = htmlspecialchars($_POST["confPassword"]);
 
-        if($pass != $confPass) {
+        if(empty($user)) {
+            $_SESSION['emptyUser'] = 'emptyUser';
+            header("Location: ../views/user/view_register.php");
+            die;
+        }
+
+        if($pass != $confPass || empty($pass) || empty($confPass)) {
             $_SESSION["v_pass"] = true;
             header("Location: ../views/user/view_register.php");
             die;
@@ -31,7 +37,7 @@ function register($conn) {
             query($insert_sql, $conn);
             header("Location: ../index.php");
         } else {
-            $_SESSION["v_user"] = true;
+            $_SESSION["v_user"] = 'existUser';
             header("Location: ../views/user/view_register.php");
             die;
         }

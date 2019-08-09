@@ -1,22 +1,32 @@
 <?php
 session_start();
+$v_user = $_SESSION['v_user'] ?? $_SESSION['emptyUser'] ?? false;
+$v_pass = $_SESSION['v_pass'] ?? false;
 ?>
 
 <?php require "../template/header.php"; ?>
 <h3 class="text-center">REGISTER</h3>
 
-<?php if(isset($_SESSION["v_pass"]) && $_SESSION["v_pass"] == true) : ?>
+<?php if($v_pass) : ?>
     <div class="alert alert-danger alert-dismissible" role="alert">
     <strong>Wrong Password</strong>
 
     <?php unset($_SESSION["v_pass"]); ?>
     </div>
+<?php endif; ?>
 
-<?php elseif(isset($_SESSION["v_user"]) && $_SESSION["v_user"] == true) : ?>
+<?php if($v_user == 'existUser') : ?>
     <div class="alert alert-danger alert-dismissible" role="alert">
     <strong>Username is already taken</strong>
     
     <?php unset($_SESSION["v_user"]); ?>
+    </div>
+<?php endif; ?>
+<?php if($v_user == 'emptyUser') : ?>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+    <strong>Username is empty</strong>
+    
+    <?php unset($_SESSION["emptyUser"]); ?>
     </div>
 <?php endif; ?>
 

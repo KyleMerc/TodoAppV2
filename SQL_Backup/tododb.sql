@@ -57,7 +57,7 @@ CREATE TABLE `users` (
   `password` varchar(100) NOT NULL,
   `user_role_id` int(11) NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp(),
-  `date_update` timestamp NOT NULL DEFAULT current_timestamp()
+  `date_updated` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
