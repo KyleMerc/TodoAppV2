@@ -27,6 +27,12 @@ session_start();
         </div>
         <?php unset($_SESSION["status"]["is_login"]); ?>
     <?php endif; ?>
+    <?php if(isset($_SESSION["status"]["is_verified"]) && $_SESSION["status"]["is_verified"] == false) : ?>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <strong>Unverified User</strong>
+        </div>
+        <?php unset($_SESSION["status"]["is_verified"]); ?>
+    <?php endif; ?>
 
     <div class="row justify-content-center mt-5">
         <form action="controller/Login.php" method="post">

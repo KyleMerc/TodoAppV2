@@ -32,18 +32,32 @@ $v_pass = $_SESSION['v_pass'] ?? false;
 
 
     <form action="../../controller/Register.php" method="post">
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="">First Name</label>
+                <input type="text" name="firstName" class="form-control" maxlength="30">
+            </div>
+            <div class="form-group col-5">
+                <label for="">Last Name</label>
+                <input type="text" name="lastName" class="form-control" maxlength="30">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="">Email</label>
+            <input type="email" name="email" class="form-control" maxlength="40">
+        </div>
         <div class="form-group">
             <label for="">Username</label>
-            <input type="text" name="username" class="form-control">
+            <input type="text" name="username" class="form-control" maxlength="30">
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="">Password</label>
-                <input type="password" name="password" class="form-control">
+                <input type="password" name="password" class="form-control" maxlength="30">
             </div>
             <div class="form-group col-md-6">
                 <label for="">Confirm Password</label>
-                <input type="password" name="confPassword" class="form-control">
+                <input type="password" name="confPassword" class="form-control" maxlength="30">
             </div>
         </div>
         <button class="btn btn-primary btn-block" name="register" type="submit">REGISTER</button>

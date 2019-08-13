@@ -33,8 +33,8 @@ function admin_edit_todo($conn) {
     if(isset($_POST["adminEditContent"])) {
         $todo_id = $_POST["adminEditTodoId"];
         $user_id = htmlspecialchars($_POST["adminUserId"]);
-        $title = htmlspecialchars($_POST["title"]);
-        $content = htmlspecialchars(addslashes($_POST["adminEditContent"]));
+        $title = strip_tags(addslashes( $_POST["title"]));
+        $content = strip_tags(addslashes($_POST["adminEditContent"]));
         $status = $_POST["editRadStatus"];
 
         $sql = "UPDATE todos 
@@ -53,8 +53,8 @@ admin_add_todo($conn);
 
 function admin_add_todo($conn) {
     if(isset($_POST["adminAddContent"])) {
-        $title = htmlspecialchars($_POST["title"]);
-        $content = htmlspecialchars(addslashes($_POST["adminAddContent"]));
+        $title = strip_tags($_POST["title"]);
+        $content = strip_tags(addslashes($_POST["adminAddContent"]));
         $user_id = $_POST["v_id"];
         $sql = "INSERT INTO todos(title, content, user_id, status) 
                 VALUES('$title', '$content', '$user_id', 'IN PROGRESS')";
@@ -86,8 +86,8 @@ user_add_todo($conn);
 
 function user_add_todo($conn) {
     if(isset($_POST["addContent"])) {
-        $title = htmlspecialchars($_POST["title"]);
-        $content = htmlspecialchars($_POST["addContent"]);
+        $title = strip_tags(addslashes($_POST["title"]));
+        $content = strip_tags(addslashes($_POST["addContent"]));
         $user_id = $_SESSION["status"]["user_id"];
         $sql = "INSERT INTO todos(title, content, user_id, status) 
                 VALUES('$title', '$content', '$user_id', 'IN PROGRESS')";
@@ -102,8 +102,8 @@ user_edit_todo($conn);
 
 function user_edit_todo($conn) {
     if(isset($_POST["editContent"])) {
-        $title = htmlspecialchars($_POST["title"]);
-        $content = htmlspecialchars($_POST["editContent"]);
+        $title = strip_tags($_POST["title"]);
+        $content = strip_tags($_POST["editContent"]);
         $status = $_POST["editRadStatus"];
         $todo_id = $_POST["todoId"];
         $sql = "UPDATE todos 

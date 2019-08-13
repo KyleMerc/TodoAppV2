@@ -1,43 +1,21 @@
 <?php
- session_start();
-
-require "../model/config.php";
+require "loadFunction.php";
 
 $user = $_POST["username"] ?? null;
 $pass = $_POST["password"] ?? null;
 
+$role_id = exist_user($user,$pass);
 
-check($user, $pass, $mysqli);
-
-function check($user, $pass, $conn) {
-    $query = "SELECT * FROM users WHERE username='$user'";
-    
-    $result = query($query, $conn);
-
-    $data = mysqli_fetch_assoc($result);
-
-    $chk_pass = $data["password"];
-    $v_pass = password_verify($pass, $chk_pass);
-
-    $exist = mysqli_num_rows($result);
-    if($exist && $v_pass) {
-        $_SESSION["status"] = [
-            "is_login" => true,
-            "user" => $user,
-            "user_id" => $data["user_id"],
-            "user_role_id" => $data["user_role_id"]
-        ];
-
-        if($data["user_role_id"] == 1) {
-            header("Location: ../views/admin/view_admin_home.php");
-        }
-
-        if($data["user_role_id"] == 2) {
-            header("Location: ../views/user/view_user_home.php");
-        }
-    } else {
-        $_SESSION["status"]["is_login"] = false;
-        header("Location: ../index.php");        
-    }   
+if($role_id == 1) {
+    header("Location: ../views/admin/view_admin_home.php");
+} elseif($role_id == 2 && is_verified($user)) {
+    header("Location: ../views/user/view_user_home.php");
+} elseif( ! is_verified($user)) {
+    $_SESSION['status']['is_verified'] = false;
+    header("Location: ../index.php");
+} else {
+    $_SESSION['status']['is_login'] = false;
+    header("Location: ../index.php");
 }
+
 
