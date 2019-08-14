@@ -12,6 +12,8 @@ if( ! isset($_GET)) {
     header("Location: view_user_home.php");
 }
 
+$userCountTodo = $_GET['c'];
+
 //Lack checking of GET parameters for admin
 $todoId = $_GET["id"];
 $user_id = $_SESSION["status"]["user_role_id"] == 1? $_GET["adminUserId"] : $_SESSION["status"]["user_id"];
@@ -51,7 +53,7 @@ $user_verify = ($role_id == 2 && $todo_check)? 'user' :
 
     <main role="main" class="col-md-9 col-lg-10 ml-sm-auto px-4">
     <?php if($user_verify == 'user' || $user_verify == 'admin') : ?>
-        <h3>Edit Todo # <?php echo $_GET["id"]; ?></h3>
+        <h3>Edit Todo # <?php echo $userCountTodo; ?></h3>
 
         <?php if($_SESSION["status"]["user_role_id"] == 2) : ?> <!-- User Edit Todo -->
             <form action="../../controller/Todo.php" class="form" method="post">

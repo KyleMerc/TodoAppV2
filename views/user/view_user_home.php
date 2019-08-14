@@ -6,7 +6,7 @@ require "../../model/config.php";
     if( ! isset($_SESSION["status"]["is_login"]) || $_SESSION["status"]["is_login"] == null) {
         header("Location: ../../index.php");
     }
-
+$userCountTodo = 0;
 $user = $_SESSION["status"]["user"];
 $user_id = $_SESSION["status"]["user_id"];
 
@@ -61,7 +61,10 @@ $result = query($sql, $mysqli);
                 <?php if(mysqli_num_rows($result) > 0) : ?>
                     <?php while($data = mysqli_fetch_assoc($result)) :?>
                     <tr>
-                        <td><?php echo $data["todo_id"]; ?></td>
+                        <td><?php $count = ++$userCountTodo; 
+                                    echo $count;
+                            ?>
+                        </td>
                         <td>
                             <?php
                                 if($data["status"] == "DONE") {
@@ -74,8 +77,8 @@ $result = query($sql, $mysqli);
                         <td><?php echo $data["title"]; ?></td>
                         <td>
                             <form action="../../controller/Todo.php" method="post">
-                                <a href="view_todo.php?t_id=<?php echo $data["todo_id"];?>&u_id=<?php echo $data["user_id"]; ?>" class="btn btn-primary"><span data-feather="info"></span></a> |
-                                <a href="view_edit_todo.php?id=<?php echo $data["todo_id"];?>" class="btn btn-primary"><span data-feather="edit"></span></a> |
+                                <a href="view_todo.php?t_id=<?php echo $data["todo_id"];?>&u_id=<?php echo $data["user_id"]; ?>&c=<?php echo $count; ?>" class="btn btn-primary"><span data-feather="info"></span></a> |
+                                <a href="view_edit_todo.php?id=<?php echo $data["todo_id"];?>&c=<?php echo $count; ?>" class="btn btn-primary"><span data-feather="edit"></span></a> |
                                 
                                 <input type="hidden" value="<?php echo $data["todo_id"]; ?>" name="delId">
                                 

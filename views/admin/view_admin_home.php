@@ -7,6 +7,7 @@ require "../../model/config.php";
         header("Location: ../../index.php");
     }
     
+    $userCountTodo = 0;
     $user_id = $_GET["v_id"] ?? false;
 
     $sql = "SELECT * FROM users";
@@ -74,6 +75,7 @@ require "../../model/config.php";
             <tr class="thead-dark">
                 <th>User ID</th>
                 <th>Username</th>
+                <th>Fullname</th>
                 <th>Date Created</th>
                 <th>Date Updated</th>
                 <th>Action</th>
@@ -87,6 +89,7 @@ require "../../model/config.php";
             <tr>
                 <td><?php echo $data["user_id"]; ?></td>
                 <td><?php echo $data["username"]; ?></td>
+                <td><?php echo $data["firstname"] . " " . $data['lastname']; ?></td>
                 <td><?php echo date('M j Y g:i A', strtotime($data["date_created"])); ?></td>
                 <td><?php echo date('M j Y g:i A', strtotime($data["date_updated"])); ?></td>
                 <td>
@@ -104,7 +107,7 @@ require "../../model/config.php";
     <?php else : ?> <!--- Users TODO list shown ---->
         <table class="table table-borderless table-hover">
             <tr class="thead-dark">
-                <th>Todo ID</th>
+                <th>Todo #</th>
                 <th>Status</th>
                 <th>Title</th>
                 <th>Action</th>
@@ -123,7 +126,10 @@ require "../../model/config.php";
                     }
             ?>
             <tr>
-                <td><?php echo $result["todo_id"]; ?></td>
+                <td><?php $count = ++$userCountTodo; 
+                            echo $count;
+                    ?>
+                </td>
                 <td>
                     <?php
                         if($result["status"] == "DONE") {
@@ -136,9 +142,9 @@ require "../../model/config.php";
                 <td><?php echo $result["title"]; ?></td>
                 <td>
                     <form action="../../controller/Todo.php" method="post">
-                        <a href="../user/view_todo.php?t_id=<?php echo $result["todo_id"];?>&u_id=<?php echo $result["user_id"];?>" class="btn btn-primary"><span data-feather="info"></span></a> |
+                        <a href="../user/view_todo.php?t_id=<?php echo $result["todo_id"];?>&u_id=<?php echo $result["user_id"];?>&c=<?php echo $count;?>" class="btn btn-primary"><span data-feather="info"></span></a> |
                           
-                        <a href="../user/view_edit_todo.php?adminUserId=<?php echo $result['user_id']; ?>&id=<?php echo $result['todo_id']; ?>" class="btn btn-primary"><span data-feather="edit"></span></a> |
+                        <a href="../user/view_edit_todo.php?adminUserId=<?php echo $result['user_id']; ?>&id=<?php echo $result['todo_id']; ?>&c=<?php echo $count;?>" class="btn btn-primary"><span data-feather="edit"></span></a> |
                         
                         <input type="hidden" value="<?php echo $result["todo_id"]; ?>" name="adminDelTodoId">
                         <input type="hidden" value="<?php echo $user_id ?>" name="adminUserId">

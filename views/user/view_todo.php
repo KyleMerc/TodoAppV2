@@ -11,6 +11,8 @@ if( ! isset($_GET)) {
     header("Location: view_user_home.php");
 }
 
+$userCountTodo = $_GET['c'];
+
 $todoId = htmlspecialchars($_GET["t_id"]);
 $userId = htmlspecialchars($_GET["u_id"]);
 
@@ -55,7 +57,7 @@ $user_verify = ($role_id == 2 && $todo_check && $username_check)? 'user' :
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <?php if($user_verify == 'user' || $user_verify == 'admin') : ?>
-        <h3>View Todo # <?php echo $_GET["t_id"]; ?></h3>
+        <h3>View Todo # <?php echo $userCountTodo; ?></h3>
         <h6> *read only </h6>
 
         <form class="form">
