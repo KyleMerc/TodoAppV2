@@ -54,12 +54,12 @@ $result = query($sql, $mysqli);
                         <td><?php echo $data["title"]; ?></td>
                         <td>
                             <form action="../../controller/Todo.php" method="post">
-                                <a href="view_todo.php?t_id=<?php echo $data["todo_id"];?>&u_id=<?php echo $data["user_id"]; ?>" class="btn btn-primary">View</a> |
-                                <a href="view_edit_todo.php?id=<?php echo $data["todo_id"];?>" class="btn btn-primary">EDIT</a> |
+                                <a href="view_todo.php?t_id=<?php echo $data["todo_id"];?>&u_id=<?php echo $data["user_id"]; ?>" class="btn btn-primary"><span data-feather="info"></span></a> |
+                                <a href="view_edit_todo.php?id=<?php echo $data["todo_id"];?>" class="btn btn-primary"><span data-feather="edit"></span></a> |
                                 
                                 <input type="hidden" value="<?php echo $data["todo_id"]; ?>" name="delId">
                                 
-                                <input type="submit" class="btn btn-danger" value="Delete">
+                                <button type="submit" class="btn btn-danger" value="Delete"><span data-feather="delete"></span></button>
                             </form>
                         </td>
                     </tr>
