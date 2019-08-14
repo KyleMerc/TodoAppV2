@@ -105,8 +105,20 @@ function check_username($username) {
     return false;
 }
 
-function insert_user(){
+function insert_user($data){
+    $user = $data['user'];
+    $encPass = $data['pass'];
+    $role_id = $data['user_role_id'];
+    $firstName = $data['firstName'];
+    $lastName = $data['lastName'];
+    $email = $data['email'];
+    $vkey = $data['vkey'];
+
+    $sql = "INSERT INTO users(username, password, user_role_id, firstname, lastname, email, vkey) 
+            VALUES('$user', '$encPass', '$role_id', '$firstName', '$lastName', '$email', '$vkey')";
     
+    $GLOBALS['mysqli']->query($sql);
+    return;
 }
 
 // Admin side

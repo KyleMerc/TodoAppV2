@@ -28,8 +28,6 @@ function register($conn) {
             die;
         }
 
-        // $verify_sql = "SELECT * FROM users WHERE username='$user'";
-        // $result = query($verify_sql, $conn);
         $exist = check_username($user);
 
 
@@ -39,9 +37,19 @@ function register($conn) {
         if( ! $exist) {
             
             $vkey = md5(time().$user);
-            $insert_sql = "INSERT INTO users(username, password, user_role_id, firstname, lastname, email, vkey) 
-                            VALUES('$user', '$encPass', 2, '$firstName', '$lastName', '$email', '$vkey')";
-            query($insert_sql, $conn);
+            
+            $data = [
+                'user' => $user,
+                'pass' => $encPass,
+                'user_role_id' => 2,
+                'firstName' => $firstName,
+                'lastName' => $lastName,
+                'email' => $email,
+                'vkey' => $vkey
+            ];
+
+            insert_user($data);
+            
             
             send_verification($email, $vkey);
 
