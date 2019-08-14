@@ -1,7 +1,8 @@
 <?php
 session_start();
 // var_dump($_POST);die;
-require "../model/config.php";
+// require "../model/config.php";
+require "loadFunction.php";
 
 
 if( ! isset($_SESSION)) {
@@ -12,9 +13,9 @@ $user_id = $_POST['userId'];
 $username = $_POST['newUsername'] == $_POST['oldUsername']? $_POST['oldUsername'] : $_POST['newUsername'];
 
 //Check other usernames if it already exists 
-check_username($user_id, $username, $mysqli);
+check_other_username($user_id, $username, $mysqli);
 
-function check_username($user_id, $username, $conn) {
+function check_other_username($user_id, $username, $conn) {
     $sql = "SELECT user_id, username FROM users";
 
     $result = query($sql, $conn);
@@ -65,19 +66,21 @@ function check_password($user_id) {
 //------------
 
 //Admin edit user account
-edit_user($username, $user_id, $mysqli);
 
-function edit_user($username, $user_id, $conn) {
-    if(isset($_POST["editUser"])) {
-        $password = $_POST["newPassword"] == ''? $_POST['oldPassword'] : password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
-        
-        $sql = "UPDATE users
-                SET username='$username', password='$password', date_updated=CURRENT_TIMESTAMP
-                WHERE user_id='$user_id'";
-                
+
+if(isset($_POST["editUser"])) {
+    $password = $_POST["newPassword"] == ''? $_POST['oldPassword'] : password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
     
-       query($sql, $conn);
-       header("Location: ../views/admin/view_admin_home.php");
-    }
+    $data = [
+        'username' => $username,
+        'password' => $password,
+        'user_id' => $user_id
+    ];
+    
+    update_user($data);
+    
+    header("Location: ../views/admin/view_admin_home.php");
+    die;
 }
+
 //------------

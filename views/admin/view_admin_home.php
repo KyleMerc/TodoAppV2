@@ -45,6 +45,14 @@ require "../../model/config.php";
                         Settings
                     </a>
                 </li>
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Action</span>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a href="../../controller/Logout.php" class="nav-link">Log Out</a>
+                    </li>
+                </ul>
             </ul>
         </div>
     </nav>
@@ -53,12 +61,6 @@ require "../../model/config.php";
     <div class="row">
         <div class="col-md-6">
             <h3>Admin Panel</h3>
-        </div>
-        
-        <div class="col-md-6">
-            <form action="../../controller/Logout.php" method="post">
-                <button class="btn btn-primary float-right" type="submit">Log Out</button>
-            </form>
         </div>
     </div>
     

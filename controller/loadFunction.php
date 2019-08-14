@@ -121,6 +121,19 @@ function insert_user($data){
     return;
 }
 
+function update_user($data) {
+    $username = $data['username'];
+    $password = $data['password'];
+    $user_id = $data['user_id'];
+
+    $sql = "UPDATE users
+                SET username='$username', password='$password', date_updated=CURRENT_TIMESTAMP
+                WHERE user_id='$user_id'";
+    
+    $GLOBALS['mysqli']->query($sql);
+    return;
+}
+
 // Admin side
 // function check_username($user_id, $username, $conn) {
 //     $sql = "SELECT user_id, username FROM users";

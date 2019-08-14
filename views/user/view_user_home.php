@@ -33,6 +33,14 @@ $result = query($sql, $mysqli);
                     </a>
                 </li>
             </ul>
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>Action</span>
+            </h6>
+            <ul class="nav flex-column mb-2">
+                <li class="nav-item">
+                    <a href="../../controller/Logout.php" class="nav-link">Log Out</a>
+                </li>
+            </ul>
         </div>
     </nav>
 
@@ -42,11 +50,6 @@ $result = query($sql, $mysqli);
             <div class="row">
                 <div class="col-md-6">
                     <a href="view_add_todo.php" class="btn btn-primary">Add Task <span data-feather="plus"></span></a>
-                </div>
-                <div class="col-md-6">
-                    <form action="../../controller/Logout.php" method="post">
-                        <button class="btn btn-primary float-right">Log Out</button>
-                    </form>
                 </div>
             </div>
     
