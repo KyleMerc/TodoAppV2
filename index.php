@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+// print_r(pathinfo(__FILE__, PATHINFO_DIRNAME));
     if( ! isset($_SESSION)) {
         header("Location: index.php");
     }

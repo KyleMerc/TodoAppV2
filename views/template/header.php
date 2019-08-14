@@ -8,7 +8,10 @@
 
     <link rel="stylesheet" href="../styles/bootstrap.css">
     <link rel="stylesheet" href="../styles/signin.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
 </head>
 <body>
-    <div class="container">
-    <h1 class="mark text-center text-bold">TODO Web App</h1>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Todo App V2</a>
+    </nav>
+    <div class="container-fluid">

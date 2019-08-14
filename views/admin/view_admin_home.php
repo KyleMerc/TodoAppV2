@@ -26,6 +26,10 @@ require "../../model/config.php";
 ?>
 
 <?php require "../template/header.php"; ?>
+    <div class="container-fluid">
+    <main role="main">
+
+
     <div class="row">
         <div class="col-md-6">
             <h3>Admin Panel</h3>
@@ -68,11 +72,11 @@ require "../../model/config.php";
                 <td><?php echo date('M j Y g:i A', strtotime($data["date_updated"])); ?></td>
                 <td>
                     <form action="../../controller/Todo.php" method="post">
-                        <a href="<?php echo $_SERVER["PHP_SELF"]; ?>?v_id=<?php echo $data["user_id"];?>" class="btn btn-primary">View</a> |
-                        <a href="view_admin_edit_user.php?id=<?php echo $data["user_id"];?>" class="btn btn-primary">EDIT</a> |
+                        <a href="<?php echo $_SERVER["PHP_SELF"]; ?>?v_id=<?php echo $data["user_id"];?>" class="btn btn-primary"><span data-feather="info"></span></a> |
+                        <a href="view_admin_edit_user.php?id=<?php echo $data["user_id"];?>" class="btn btn-primary"><span data-feather="edit"></span></a> |
 
                         <input type="hidden" value="<?php echo $data["user_id"]; ?>" name="userDelId">
-                        <button class="btn btn-danger">DELETE</button>
+                        <button class="btn btn-danger"><span data-feather="delete"></span></button>
                     </form>
                 </td>
             </tr>
@@ -113,13 +117,13 @@ require "../../model/config.php";
                 <td><?php echo $result["title"]; ?></td>
                 <td>
                     <form action="../../controller/Todo.php" method="post">
-                        <a href="../user/view_todo.php?t_id=<?php echo $result["todo_id"];?>&u_id=<?php echo $result["user_id"];?>" class="btn btn-primary">View</a> |
+                        <a href="../user/view_todo.php?t_id=<?php echo $result["todo_id"];?>&u_id=<?php echo $result["user_id"];?>" class="btn btn-primary"><span data-feather="info"></span></a> |
                           
-                        <a href="../user/view_edit_todo.php?adminUserId=<?php echo $result['user_id']; ?>&id=<?php echo $result['todo_id']; ?>" class="btn btn-primary">EDIT</a> |
+                        <a href="../user/view_edit_todo.php?adminUserId=<?php echo $result['user_id']; ?>&id=<?php echo $result['todo_id']; ?>" class="btn btn-primary"><span data-feather="edit"></span></a> |
                         
                         <input type="hidden" value="<?php echo $result["todo_id"]; ?>" name="adminDelTodoId">
                         <input type="hidden" value="<?php echo $user_id ?>" name="adminUserId">
-                        <button class="btn btn-danger" type="submit">DELETE</button>
+                        <button class="btn btn-danger" type="submit"><span data-feather="delete"></span></button>
                     </form>        
                 </td>
             </tr>
@@ -135,5 +139,6 @@ require "../../model/config.php";
         </div>
     </div>
     <?php endif; ?>
-    
+    </main>
+    </div>
 <?php require "../template/footer.php"; ?>

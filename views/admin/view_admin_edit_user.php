@@ -12,6 +12,7 @@ $data = mysqli_fetch_assoc($result);
 ?>
 
 <?php require "../template/header.php"; ?>
+    <main class="container" role="main">
     <?php if(mysqli_num_rows($result) > 0 && $data['user_role_id'] != 1) : ?>
         <h3>Edit User <?php echo $data["username"]; ?></h3>
 
@@ -96,6 +97,6 @@ $data = mysqli_fetch_assoc($result);
         </div>
         <a href="view_admin_home.php" class="btn btn-primary">Go back</a>
     <?php endif; ?>
-
+    </main>
     
 <?php require "../template/footer.php"; ?>

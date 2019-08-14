@@ -16,11 +16,12 @@ $result = query($sql, $mysqli);
 ?>
 
 <?php require "../template/header.php"; ?>
+<main class="container-fluid" role="main">
     <h3>Welcome <?php echo $user; ?></h3>
 
             <div class="row">
                 <div class="col-md-6">
-                    <a href="view_add_todo.php" class="btn btn-primary">Add Task</a>
+                    <a href="view_add_todo.php" class="btn btn-primary">Add Task <span data-feather="plus"></span></a>
                 </div>
                 <div class="col-md-6">
                     <form action="../../controller/Logout.php" method="post">
@@ -65,7 +66,5 @@ $result = query($sql, $mysqli);
                     <?php endwhile; ?>
                 <?php endif; ?>
             </table>
-    <?php
-       // }
-    ?>
+</main>
 <?php require "../template/footer.php"; ?>
