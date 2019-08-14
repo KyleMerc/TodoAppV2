@@ -12,7 +12,27 @@ $data = mysqli_fetch_assoc($result);
 ?>
 
 <?php require "../template/header.php"; ?>
-    <main class="container" role="main">
+<div class="container-fluid">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <span data-feather="home"></span>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span data-feather="settings"></span>
+                        Settings
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <?php if(mysqli_num_rows($result) > 0 && $data['user_role_id'] != 1) : ?>
         <h3>Edit User <?php echo $data["username"]; ?></h3>
 
@@ -98,5 +118,6 @@ $data = mysqli_fetch_assoc($result);
         <a href="view_admin_home.php" class="btn btn-primary">Go back</a>
     <?php endif; ?>
     </main>
-    
+
+</div>
 <?php require "../template/footer.php"; ?>

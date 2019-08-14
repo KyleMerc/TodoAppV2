@@ -27,9 +27,28 @@ require "../../model/config.php";
 
 <?php require "../template/header.php"; ?>
     <div class="container-fluid">
-    <main role="main">
+    
 
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <span data-feather="home"></span>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span data-feather="settings"></span>
+                        Settings
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="row">
         <div class="col-md-6">
             <h3>Admin Panel</h3>

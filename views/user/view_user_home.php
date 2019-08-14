@@ -16,7 +16,27 @@ $result = query($sql, $mysqli);
 ?>
 
 <?php require "../template/header.php"; ?>
-<main class="container-fluid" role="main">
+<div class="container-fluid">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <span data-feather="home"></span>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span data-feather="settings"></span>
+                        Settings
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+<main class="col-md-9 col-lg-10 ml-sm-auto px-4" role="main">
     <h3>Welcome <?php echo $user; ?></h3>
 
             <div class="row">
@@ -67,4 +87,5 @@ $result = query($sql, $mysqli);
                 <?php endif; ?>
             </table>
 </main>
+</div>
 <?php require "../template/footer.php"; ?>

@@ -11,6 +11,27 @@ if( ! isset($_SESSION)) {
 ?>
 
 <?php require "../template/header.php"; ?>
+<div class="container-fluid">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <span data-feather="home"></span>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span data-feather="settings"></span>
+                        Settings
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="col-md-9 col-lg-10 ml-sm-auto px-4" role="main">
     <h3>Add Todo / Task</h3>
 
     <?php if($_SESSION["status"]["user_role_id"] == 2) : ?>
@@ -48,5 +69,6 @@ if( ! isset($_SESSION)) {
         <br />
         <a href="../admin/view_admin_home.php?v_id=<?php echo $_GET['v_id']?>" class="btn btn-primary">Go back</a>
     <?php endif; ?>
-    
+    </main>
+</div>
 <?php require "../template/footer.php"; ?>

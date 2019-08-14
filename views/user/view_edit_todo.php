@@ -29,6 +29,27 @@ $user_verify = ($role_id == 2 && $todo_check)? 'user' :
 ?>
 
 <?php require "../template/header.php"; ?>
+<div class="container-fluid">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <span data-feather="home"></span>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span data-feather="settings"></span>
+                        Settings
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main role="main" class="col-md-9 col-lg-10 ml-sm-auto px-4">
     <?php if($user_verify == 'user' || $user_verify == 'admin') : ?>
         <h3>Edit Todo # <?php echo $_GET["id"]; ?></h3>
 
@@ -131,5 +152,7 @@ $user_verify = ($role_id == 2 && $todo_check)? 'user' :
             echo "<a href='view_user_home.php' class='btn btn-primary'>Go back</a>";
         }
     ?>
+    </main>
+</div>
 
 <?php require "../template/footer.php"; ?>
