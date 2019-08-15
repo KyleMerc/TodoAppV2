@@ -1,7 +1,8 @@
 <?php
-require "../model/config.php";
+$root = $_SERVER['DOCUMENT_ROOT'];
 
-session_start();
+require $root . "/TODOapp/controller/loadFunction.php";
+
 
 if( ! isset($_SESSION)) {
     header("Location: ../index.php");

@@ -1,5 +1,4 @@
 <?php
-session_start();
 // var_dump($_POST);die;
 // require "../model/config.php";
 require "loadFunction.php";
@@ -9,6 +8,8 @@ if( ! isset($_SESSION)) {
     header("Location: ../index.php");
 }
 
+$firstName = $_POST['oldFirstname'] == $_POST['newFirstname'] ? $_POST['oldFirstname'] : $_POST['newFirstname'];
+$lastName = $_POST['oldLastname'] == $_POST['newLastname'] ? $_POST['oldLastname'] : $_POST['newLastname'];
 $user_id = $_POST['userId'];
 $username = $_POST['newUsername'] == $_POST['oldUsername']? $_POST['oldUsername'] : $_POST['newUsername'];
 
@@ -42,27 +43,21 @@ function check_other_username($user_id, $username, $conn) {
 //------------------
 
 //Admin error sessions
-erase_error_sess();
-
-function erase_error_sess() {
-    if(isset($_POST['actionAdminGoBack']) && $_POST['actionAdminGoBack'] == 'Go Back') {
-        unset($_SESSION['error']);
-        header("Location: ../views/admin/view_admin_home.php");
-        die;
-    }
+if(isset($_POST['actionAdminGoBack']) && $_POST['actionAdminGoBack'] == 'Go Back') {
+    unset_error_sess();
+    header("Location: ../views/admin/view_admin_home.php");
+    die;
 }
+
 //----------
 
 //Check new password for edited user
-check_password($user_id);
-
-function check_password($user_id) {
-    if(($_POST['newPassword'] !== $_POST['confNewPassword']) || empty($_POST['newPassword'])) {
-        $_SESSION['error']['errorPass'] = true;
-        header("Location: ../views/admin/view_admin_edit_user.php?id=$user_id");
-        die;
-    }
+if(($_POST['newPassword'] !== $_POST['confNewPassword'])) {
+    error_password();
+    header("Location: ../views/admin/view_admin_edit_user.php?id=$user_id");
+    die;
 }
+
 //------------
 
 //Admin edit user account
@@ -72,6 +67,8 @@ if(isset($_POST["editUser"])) {
     $password = $_POST["newPassword"] == ''? $_POST['oldPassword'] : password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
     
     $data = [
+        'firstname' => $firstName,
+        'lastname' => $lastName,
         'username' => $username,
         'password' => $password,
         'user_id' => $user_id

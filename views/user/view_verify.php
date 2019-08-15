@@ -1,6 +1,10 @@
 <?php
 session_start();
-require "../../model/config.php";
+
+$root = $_SERVER['DOCUMENT_ROOT'];
+
+require $root . "/TODOapp/model/config.php";
+
 if( ! isset($_GET['vkey'])) {
     header("Location: ../../index.php");
 }

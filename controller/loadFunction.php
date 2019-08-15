@@ -1,7 +1,9 @@
 <?php
 session_start();
-require_once "../model/config.php";
-require_once "../vendor/autoload.php";
+$root = $_SERVER['DOCUMENT_ROOT'];
+
+require_once $root . "/TODOapp/model/config.php";
+require_once $root . "/TODOapp/vendor/autoload.php";
 
 use \PHPMailer\PHPMailer\PHPMailer;
 use \PHPMailer\PHPMailer\Exception;
@@ -105,6 +107,9 @@ function check_username($username) {
     return false;
 }
 
+
+//Admin side
+
 function insert_user($data){
     $user = $data['user'];
     $encPass = $data['pass'];
@@ -122,40 +127,29 @@ function insert_user($data){
 }
 
 function update_user($data) {
+    $firstName = $data['firstname'];
+    $lastName = $data['lastname'];
     $username = $data['username'];
     $password = $data['password'];
     $user_id = $data['user_id'];
 
     $sql = "UPDATE users
-                SET username='$username', password='$password', date_updated=CURRENT_TIMESTAMP
-                WHERE user_id='$user_id'";
+            SET firstname='$firstName', lastname='$lastName', username='$username', password='$password', date_updated=CURRENT_TIMESTAMP
+            WHERE user_id='$user_id'";
     
     $GLOBALS['mysqli']->query($sql);
     return;
 }
 
-// Admin side
-// function check_username($user_id, $username, $conn) {
-//     $sql = "SELECT user_id, username FROM users";
+function error_password() {
+    return $_SESSION['error']['errorPass'] = true;
+}
 
-//     $result = query($sql, $conn);
+function unset_error_sess() {
+    unset($_SESSION['error']);
+    return;
+}
 
-//     if(empty($username)) {
-//         $_SESSION['error']['emptyUsername'] = true;
-//         header("Location: ../views/admin/view_admin_edit_user.php?id=$user_id");
-//         die;
-//     }
+// function check_other_username() {
 
-//     while($data = mysqli_fetch_assoc($result)) {
-//         $data_check[] = $data;
-//     }
-//     foreach($data_check as $row){
-//         if($username == $row['username']) {
-//             if($row['user_id'] == $user_id) continue;
-            
-//             $_SESSION['error']['errorUsername'] = true;
-//             header("Location: ../views/admin/view_admin_edit_user.php?id=$user_id");
-//             die;
-//         }
-//     }
 // }

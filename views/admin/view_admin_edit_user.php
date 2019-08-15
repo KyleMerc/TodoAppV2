@@ -1,7 +1,8 @@
 <?php
 session_start();
-// var_dump($_SESSION);
-require "../../model/config.php";
+$root = $_SERVER['DOCUMENT_ROOT'];
+
+require $root . "/TODOapp/model/config.php";
 
 $user_id = $_GET['id'] ?? false;
 
@@ -37,6 +38,8 @@ $data = mysqli_fetch_assoc($result);
         <h3>Edit User <?php echo $data["username"]; ?></h3>
 
         <form action="../../controller/Admin.php" class="form" method="post">
+            <input type="hidden" name="oldFirstname" value="<?php echo $data['firstname']; ?>">
+            <input type="hidden" name="oldLastname" value="<?php echo $data['lastname']; ?>">
             <input type="hidden" name="oldUsername" value="<?php echo $data['username']; ?>">
             <input type="hidden" name="oldPassword" value="<?php echo $data['password']; ?>">
             <input type="hidden" name="userId" value="<?php echo $data['user_id']; ?>">
@@ -49,6 +52,24 @@ $data = mysqli_fetch_assoc($result);
                 <div class="form-group col-md-6">
                     <label for="" class="font-weight-bold">Date Updated</label>
                     <input type="text" class="form-control-plaintext" value="<?php echo date('M j Y g:i A', strtotime($data["date_updated"]));?>">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="" class="font-weight-bold">Email</label>
+                    <input type="text" class="form-control-plaintext" value="<?php echo $data['email']; ?>" readonly>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="" class="font-weight-bold">First Name</label>
+                    <input type="text" class="form-control" value="<?php echo $data['firstname']; ?>" name="newFirstname">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="" class="font-weight-bold">Last Name</label>
+                    <input type="text" class="form-control" value="<?php echo $data['lastname']; ?>" name="newLastname">
                 </div>
             </div>
 
