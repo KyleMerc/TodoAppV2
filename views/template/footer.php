@@ -7,6 +7,7 @@
         <script src="../styles/js/bootstrap.bundle.min.js"></script>
         <script src="../styles/js/custom.js"></script>
         <script src="../styles/js/dashboard.js"></script>
+        <script src="../styles/js/addSubTodo.js"></script>
        
     </body>
 </html>

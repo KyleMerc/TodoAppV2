@@ -66,10 +66,13 @@ require  $root . '/TODOapp/controller/loadFunction.php';
     
 
     <?php
-        if($user_id != false) {
+        if($user_id != false) :
             $user = mysqli_fetch_assoc($user_data);  
             echo "<h3>Todos from " . $user["username"] . " </h3>";
-        }
+    ?>
+            <a href="../user/view_add_todo.php?v_id=<?php echo $_GET["v_id"]; ?>" class="btn btn-primary">Add Task <span data-feather="plus"></span></a>
+    <?php
+        endif;
     ?>
     
     <?php if( ! $user_id) : ?>      <!--- USER list shown --->
@@ -160,9 +163,6 @@ require  $root . '/TODOapp/controller/loadFunction.php';
     <div class="row">
         <div class="col-md-6">
             <a href="view_admin_home.php" class="btn btn-primary">Go back</a>       
-        </div>
-        <div class="col-md-6">
-            <a href="../user/view_add_todo.php?v_id=<?php echo $_GET["v_id"]; ?>" class="btn btn-primary float-right">Add Task</a>
         </div>
     </div>
     <?php endif; ?>

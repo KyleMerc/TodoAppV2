@@ -1,6 +1,4 @@
 <?php
-// var_dump($_POST);die;
-// require "../model/config.php";
 require "loadFunction.php";
 
 
@@ -8,8 +6,8 @@ if( ! isset($_SESSION)) {
     header("Location: ../index.php");
 }
 
-$firstName = $_POST['oldFirstname'] == $_POST['newFirstname'] ? $_POST['oldFirstname'] : $_POST['newFirstname'];
-$lastName = $_POST['oldLastname'] == $_POST['newLastname'] ? $_POST['oldLastname'] : $_POST['newLastname'];
+$firstName = $_POST['oldFirstname'] == $_POST['newFirstname']? $_POST['oldFirstname'] : $_POST['newFirstname'];
+$lastName = $_POST['oldLastname'] == $_POST['newLastname']? $_POST['oldLastname'] : $_POST['newLastname'];
 $user_id = $_POST['userId'];
 $username = $_POST['newUsername'] == $_POST['oldUsername']? $_POST['oldUsername'] : $_POST['newUsername'];
 

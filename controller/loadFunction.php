@@ -111,12 +111,12 @@ function check_username($username) {
 //Admin side
 
 function insert_user($data){
-    $user = $data['user'];
+    $user = strip_tags($data['user']);
     $encPass = $data['pass'];
     $role_id = $data['user_role_id'];
-    $firstName = $data['firstName'];
-    $lastName = $data['lastName'];
-    $email = $data['email'];
+    $firstName = strip_tags($data['firstName']);
+    $lastName = strip_tags($data['lastName']);
+    $email = strip_tags($data['email']);
     $vkey = $data['vkey'];
 
     $sql = "INSERT INTO users(username, password, user_role_id, firstname, lastname, email, vkey) 
@@ -127,9 +127,9 @@ function insert_user($data){
 }
 
 function update_user($data) {
-    $firstName = $data['firstname'];
-    $lastName = $data['lastname'];
-    $username = $data['username'];
+    $firstName = strip_tags($data['firstname']);
+    $lastName = strip_tags($data['lastname']);
+    $username = strip_tags($data['username']);
     $password = $data['password'];
     $user_id = $data['user_id'];
 

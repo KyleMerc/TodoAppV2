@@ -30,8 +30,8 @@ $result = query($sql, $mysqli);
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <span data-feather="settings"></span>
-                        Settings
+                        <span data-feather="user"></span>
+                        Profile
                     </a>
                 </li>
             </ul>
@@ -48,7 +48,6 @@ $result = query($sql, $mysqli);
 
 <main class="col-md-9 col-lg-10 ml-sm-auto px-4" role="main">
     <h3>Welcome <?php echo $user; ?></h3>
-
             <div class="row">
                 <div class="col-md-6">
                     <a href="view_add_todo.php" class="btn btn-primary">Add Task <span data-feather="plus"></span></a>

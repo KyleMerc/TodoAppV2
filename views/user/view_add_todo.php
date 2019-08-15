@@ -44,11 +44,15 @@ if( ! isset($_SESSION)) {
                 <label for="">Todo</label>
                 <textarea name="addContent" class="form-control" id="" cols="30" rows="10"></textarea>
             </div>
-            
-            <input type="submit" value="Submit" name="submit" class="btn btn-primary">
+            <div class="form-row">
+                <div class="form-group col-auto">
+                    <input type="submit" value="Submit" name="submit" class="btn btn-primary">
+                </div>
+                <div class="form-group col-auto">
+                    <a href="view_user_home.php" class="btn btn-primary">Go back</a>
+                </div>
+            </div>
         </form>
-        <br />
-        <a href="view_user_home.php" class="btn btn-primary">Go back</a>
     <?php endif ;?>
     <?php if($_SESSION["status"]["user_role_id"] == 1) : ?>
         <form action="../../controller/Todo.php" class="form justify-content-center" method="post">
@@ -63,11 +67,17 @@ if( ! isset($_SESSION)) {
                 <label for="" class="font-weight-bold">Todo</label>
                 <textarea name="adminAddContent" id="" cols="30" rows="10" class="form-control"></textarea>
             </div>
-           
-            <input type="submit" value="Submit" name="submit" class="btn btn-primary">
+
+            <div class="form-row">
+                <div class="form-group col-auto">
+                    <input type="submit" value="Submit" name="submit" class="btn btn-primary">
+                </div>
+                <div class="form-group col-auto">
+                    <a href="../admin/view_admin_home.php?v_id=<?php echo $_GET['v_id']?>" class="btn btn-primary">Go back</a>
+                </div>
+            </div>
         </form>
-        <br />
-        <a href="../admin/view_admin_home.php?v_id=<?php echo $_GET['v_id']?>" class="btn btn-primary">Go back</a>
+    
     <?php endif; ?>
     </main>
 </div>
